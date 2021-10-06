@@ -19,6 +19,7 @@ Plug 'tpope/vim-sensible'
 Plug 'fnune/base16-vim'
 " }}}
 " Languages {{{
+Plug 'jiangmiao/auto-pairs'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -33,6 +34,9 @@ Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
 " }}}
 " }}}
 " Everything else {{{
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
 Plug 'bkad/CamelCaseMotion'
 " Plug 'justinmk/vim-sneak'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -51,6 +55,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'guns/vim-sexp'
+" Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " }}}
@@ -83,6 +89,7 @@ cabbrev vhelp vert help
 
 inoremap jk <Esc>
 inoremap jj <Esc>
+inoremap fd <Esc>
 
 nnoremap j gj
 nnoremap k gk
@@ -97,6 +104,13 @@ nnoremap <silent> <C-l> <C-W>l
 nnoremap <c-]> g<c-]>
 vnoremap <c-]> g<c-]>
 
+" move lines up and down
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
 " inoremap 1 !
 " inoremap 2 @
 " inoremap 3 #
@@ -222,6 +236,9 @@ let g:is_bash=1
 " }}}
 " }}}
 " Plugin configurations {{{
+" UtilsSnip {{{
+
+" }}}
 " Airline {{{
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
@@ -267,11 +284,11 @@ nmap <leader>f  <Plug>(coc-format-selected)
 nnoremap <silent><leader>dh :call <SID>show_documentation()<CR>
 " nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-" nnoremap <silent><leader>gd :call CocAction('jumpDefinition')<CR>
+" nnoremap <silent><leader>gg :call CocAction('jumpDefinition')<CR>
 " nnoremap <silent><leader>gl :call CocAction('jumpDeclaration')<CR>
 " nnoremap <silent><leader>gi :call CocAction('jumpImplementation')<CR>
 " nnoremap <silent><leader>gr <Plug>(coc-references)
-nmap <silent><leader>gd <Plug>(coc-definition)
+nmap <silent><leader>gg <Plug>(coc-definition)
 nmap <silent><leader>gy <Plug>(coc-type-definition)
 nmap <silent><leader>gi <Plug>(coc-implementation)
 nmap <silent><leader>gr <Plug>(coc-references)

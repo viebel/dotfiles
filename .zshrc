@@ -1,7 +1,7 @@
 # credits https://pastebin.com/Tgji4PZv
 
 # zinit {{{
-source '/home/ory/.zinit/bin/zinit.zsh'
+source "$HOME/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 # }}}
@@ -135,6 +135,11 @@ zinit light davidparsson/zsh-pyenv-lazy
 export JQ_COLORS='0;31:0;39:0;39:0;39:0;32:1;39:1;39'
 # }}}
 
+# ruby {{{
+if [ -f $HOME/.rvm/scripts/rvm ]; then
+      source $HOME/.rvm/scripts/rvm
+fi
+# }}}
 # source secret env keys, etc.
 source $HOME/.zsh-secrets
 
