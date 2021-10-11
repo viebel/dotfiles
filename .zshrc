@@ -144,6 +144,10 @@ fi
 source $HOME/.zsh-secrets
 
 # aliases {{{
+if [ -f ~/.cyco_aliases ]; then
+    . ~/.cyco_aliases
+fi
+
 alias c="cd"
 alias c-="c -"
 alias cd..="cd .."
@@ -225,5 +229,12 @@ json2yaml() { python -c 'import sys, yaml, json; yaml.dump(json.load(sys.stdin),
 # }}}
 
 
+export PATH=$PATH:/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
 # vim:foldlevel=0
 # vim:foldmethod=marker
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/viebel/google-cloud-sdk/path.zsh.inc' ]; then . '/home/viebel/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/viebel/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/viebel/google-cloud-sdk/completion.zsh.inc'; fi

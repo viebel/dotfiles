@@ -8,34 +8,13 @@
 " github.com/mathiasbynens/dotfiles/blob/master/.vimrc
 " viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html
 " }}}
-" Plugins {{{
-" Init vim-plug {{{
-call plug#begin(stdpath('data') . '/plugged')
-" }}}
-" Sane defaults {{{
-Plug 'tpope/vim-sensible'
-" }}}
-" Colors {{{
-Plug 'fnune/base16-vim'
-" }}}
-" Languages {{{
-Plug 'jiangmiao/auto-pairs'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'sheerun/vim-polyglot'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/playground'
-Plug 'p00f/nvim-ts-rainbow'
-" Clojure {{{
-Plug 'Olical/conjure', { 'for': 'clojure', 'tag': 'develop' }
-" }}}
-" Python {{{
-Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
-" }}}
-" }}}
-" }}}
 " Everything else {{{
+Plug 'kien/ctrlp.vim'
+Plug 'jceb/vim-orgmode'
+Plug 'tpope/vim-speeddating'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 Plug 'bkad/CamelCaseMotion'
 " Plug 'justinmk/vim-sneak'
@@ -56,14 +35,21 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'guns/vim-sexp'
-" Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'Pocco81/AutoSave.nvim'
+Plug 'tommcdo/vim-exchange'
 " }}}
+
 " Finish Init vim-plug {{{
 call plug#end()
 " }}}
 " Options {{{
+" set autochdir
+set wrap
+" }}}
+
 " Colors {{{
 let base16colorspace=256
 colorscheme base16-eighties
@@ -82,8 +68,9 @@ set wildignore+=*.pyc,*.pyo,*.egg,*.egg-info
 set wildignore+=*.a,*.o,*.so
 set wildignore+=*.class
 " }}}
-" Keys {{{
-let mapleader=","
+" Keys {{_{
+nnoremap <SPACE> <Nop>
+let mapleader=" "
 let maplocalleader=","
 cabbrev vhelp vert help
 
@@ -91,10 +78,11 @@ inoremap jk <Esc>
 inoremap jj <Esc>
 inoremap fd <Esc>
 
+"Insert single character with Space
+" nnoremap <Space> i_<Esc>r
+
 nnoremap j gj
 nnoremap k gk
-
-nnoremap <leader>3 <C-^>
 
 nnoremap <silent> <C-j> <C-W>j
 nnoremap <silent> <C-k> <C-W>k
@@ -111,6 +99,17 @@ inoremap <A-j> <Esc>:m .+1<CR>==gi
 inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
+
+" yank buffer name
+" relative path (src/foo.txt)
+nnoremap <leader>cf :let @+=expand("%")<CR>
+" absolute path (/something/src/foo.txt)
+nnoremap <leader>cF :let @+=expand("%:p")<CR>
+" filename (foo.txt)
+nnoremap <leader>ct :let @+=expand("%:t")<CR>
+" directory name (/something/src)
+nno <leader>ch :let @+=expand("%:p:h")<CR>
+
 " inoremap 1 !
 " inoremap 2 @
 " inoremap 3 #
@@ -236,6 +235,14 @@ let g:is_bash=1
 " }}}
 " }}}
 " Plugin configurations {{{
+" Firenvim {{{
+if exists('g:started_by_firenvim')
+  set guifont=Iosevka:h20
+  set laststatus=0
+else
+  set laststatus=2
+endif
+" }}}
 " UtilsSnip {{{
 
 " }}}
@@ -275,73 +282,74 @@ endfunction
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-nmap <leader>rn <Plug>(coc-rename)
+nmap <localleader>rn <Plug>(coc-rename)
 
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <localleader>f  <Plug>(coc-format-selected)
+nmap <localleader>f  <Plug>(coc-format-selected)
 
 " nnoremap <silent> K :call <SID>show_doc()<CR>
-nnoremap <silent><leader>dh :call <SID>show_documentation()<CR>
+nnoremap <silent><localleader>dh :call <SID>show_documentation()<CR>
 " nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-" nnoremap <silent><leader>gg :call CocAction('jumpDefinition')<CR>
-" nnoremap <silent><leader>gl :call CocAction('jumpDeclaration')<CR>
-" nnoremap <silent><leader>gi :call CocAction('jumpImplementation')<CR>
-" nnoremap <silent><leader>gr <Plug>(coc-references)
-nmap <silent><leader>gg <Plug>(coc-definition)
-nmap <silent><leader>gy <Plug>(coc-type-definition)
-nmap <silent><leader>gi <Plug>(coc-implementation)
-nmap <silent><leader>gr <Plug>(coc-references)
+" nnoremap <silent><localleader>gg :call CocAction('jumpDefinition')<CR>
+" nnoremap <silent><localleader>gl :call CocAction('jumpDeclaration')<CR>
+" nnoremap <silent><localleader>gi :call CocAction('jumpImplementation')<CR>
+" nnoremap <silent><localleader>gr <Plug>(coc-references)
+nmap <silent><localleader>gg <Plug>(coc-definition)
+nmap <silent><localleader>gy <Plug>(coc-type-definition)
+nmap <silent><localleader>gi <Plug>(coc-implementation)
+nmap <silent><localleader>gr <Plug>(coc-references)
 
-nnoremap <silent><nowait> <leader>ga  :<C-u>CocFzfList diagnostics<cr>
-nmap <silent><leader>ge <Plug>(coc-diagnostic-info)
+nnoremap <silent><nowait> <localleader>ga  :<C-u>CocFzfList diagnostics<cr>
+nmap <silent><localleader>ge <Plug>(coc-diagnostic-info)
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
-" nmap <leader>qf <Plug>(coc-fix-current)
+" nmap <localleader>qf <Plug>(coc-fix-current)
 
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " Other helpful stuff
-" nnoremap <silent><leader>gc :call CocAction('codeAction')<CR>
-" nnoremap <silent><leader>gR :call CocAction('rename')<CR>
-" nnoremap <silent><leader>gq :call CocAction('quickfixes')<CR>
-" nnoremap <silent><leader>,. :call CocActionAsync('format')<CR>
-" nnoremap <silent><leader>gL :CocFzfList<CR>
+" nnoremap <silent><localleader>gc :call CocAction('codeAction')<CR>
+" nnoremap <silent><localleader>gR :call CocAction('rename')<CR>
+" nnoremap <silent><localleader>gq :call CocAction('quickfixes')<CR>
+" nnoremap <silent><localleader>,. :call CocActionAsync('format')<CR>
+" nnoremap <silent><localleader>gL :CocFzfList<CR>
 
 " Highlight the symbol and its references when holding the cursor.
 " autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Clojure stuff {{{
-nnoremap <silent> <leader>rrc :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'cycle-coll', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> <leader>rrn :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'clean-ns', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> <leader>rrp :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'cycle-privacy', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> <leader>rrf :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'extract-function', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Function name: ')]})<CR>
+nnoremap <silent> <localleader>rrc :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'cycle-coll', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> <localleader>rrn :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'clean-ns', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> <localleader>rrp :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'cycle-privacy', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> <localleader>rrf :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'extract-function', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Function name: ')]})<CR>
 
-nnoremap <silent> <leader>rth :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-first', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> <leader>rtt :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-last', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> <leader>rtf :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-first-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> <leader>rtl :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-last-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> <leader>rtw :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'unwind-thread', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> <leader>rta :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'unwind-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> <localleader>rth :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-first', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> <localleader>rtt :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-last', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> <localleader>rtf :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-first-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> <localleader>rtl :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-last-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> <localleader>rtw :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'unwind-thread', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> <localleader>rta :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'unwind-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
 
-nnoremap <silent> <leader>rlm :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'move-to-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')]})<CR>
-nnoremap <silent> <leader>rli :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'introduce-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')]})<CR>
-nnoremap <silent> <leader>rle :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'expand-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> <localleader>rlm :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'move-to-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')]})<CR>
+nnoremap <silent> <localleader>rli :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'introduce-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')]})<CR>
+nnoremap <silent> <localleader>rle :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'expand-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
 
-nnoremap <silent> <leader>rom :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'add-missing-libspec', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> <leader>ros :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'inline-symbol', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> <localleader>ram :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'add-missing-libspec', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> <localleader>ros :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'inline-symbol', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
 " }}}
 " }}}
 " Conjure {{{
+let g:sexp_insert_after_wrap  = v:false
 let g:conjure#mapping#def_word = v:false
 highlight! link NormalFloat StatusLine
 " }}}
 " fzf {{{
 let g:fzf_command_prefix = 'Fzf'
-nnoremap <silent> <Leader>f :FzfFiles<CR>
-nnoremap <silent> <Leader>b :FzfBuffers<CR>
-nnoremap <silent> <Leader>a :FzfAg<CR>
+nnoremap <silent> <Leader>pf :FzfFiles<CR>
+nnoremap <silent> <Leader>bb :FzfBuffers<CR>
+nnoremap <silent> <Leader>ff :FZF %:p:h<CR>
 " }}}
 " NERDTree {{{
 let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
@@ -458,4 +466,28 @@ augroup FileTypeActions
 augroup END
 " }}}
 " }}}
+" AutoSave {{{
+lua << EOF
+local autosave = require("autosave")
+
+autosave.setup(
+    {
+        enabled = true,
+        execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
+        events = {"InsertLeave", "TextChanged"},
+        conditions = {
+            exists = true,
+            filename_is_not = {},
+            filetype_is_not = {},
+            modifiable = true
+        },
+        write_all_buffers = false,
+        on_off_commands = true,
+        clean_command_line_interval = 0,
+        debounce_delay = 135
+    }
+)
+EOF
 " }}}
+" }}}
+
