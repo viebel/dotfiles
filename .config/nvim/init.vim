@@ -8,6 +8,30 @@
 " github.com/mathiasbynens/dotfiles/blob/master/.vimrc
 " viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html
 " }}}
+" Plugins {{{
+" Init vim-plug {{{
+call plug#begin(stdpath('data') . '/plugged')
+" }}}
+" Sane defaults {{{
+Plug 'tpope/vim-sensible'
+" }}}
+" Colors {{{
+Plug 'fnune/base16-vim'
+" }}}
+" Languages {{{
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'sheerun/vim-polyglot'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
+Plug 'p00f/nvim-ts-rainbow'
+" Clojure {{{
+Plug 'Olical/conjure', { 'for': 'clojure', 'tag': 'develop' }
+" }}}
+" Python {{{
+Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
+" }}}
+" }}}
+" }}}
 " Everything else {{{
 Plug 'kien/ctrlp.vim'
 Plug 'jceb/vim-orgmode'
@@ -47,7 +71,6 @@ call plug#end()
 " }}}
 " Options {{{
 " set autochdir
-set wrap
 " }}}
 
 " Colors {{{
@@ -143,7 +166,7 @@ set wildmode=list:longest
 set wildignorecase
 " }}}
 " Format {{{
-set nowrap
+set wrap
 set linebreak
 set textwidth=79
 set relativenumber
@@ -205,7 +228,8 @@ set foldmethod=expr
 " if &diff | set foldmethod=diff | else | set foldmethod=syntax | endif
 set foldexpr=nvim_treesitter#foldexpr()
 set foldlevel=0
-set foldopen=block,hor,tag,percent,mark,quickfix
+" set foldopen=block,hor,tag,percent,mark,quickfix,search
+
 set foldtext=FoldText()
 " }}}
 " Backup {{{
@@ -462,7 +486,6 @@ augroup FileTypeActions
     autocmd FileType * set tags=./.tags;,~/.vimtags
     autocmd FileType gitcommit setlocal textwidth=72
     autocmd FileType qf setlocal wrap
-    autocmd FileType vim setlocal foldmethod=marker
 augroup END
 " }}}
 " }}}
