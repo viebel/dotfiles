@@ -374,9 +374,26 @@ highlight! link NormalFloat StatusLine
 " }}}
 " fzf {{{
 let g:fzf_command_prefix = 'Fzf'
-nnoremap <silent> <Leader>pf :FzfFiles<CR>
+nnoremap <silent> <Leader>pf :FzfGFiles<CR>
 nnoremap <silent> <Leader>bb :FzfBuffers<CR>
+" old files and open buffers
+nnoremap <silent> <Leader>bB :FzfHistory<CR>
 nnoremap <silent> <Leader>ff :FZF %:p:h<CR>
+nnoremap <silent> <Leader>is :FzfSnippets<CR>
+nnoremap <silent> <Leader>ss :FzfHistory/<CR>
+nnoremap <silent> <Leader>ss :FzfHistory/<CR>
+" Fuzzy search inside files with ag
+nnoremap <silent> <Leader>/ag :FzfAg<CR>
+" Regezp search inside files with ripgrep
+nnoremap <silent> <Leader>/rg :FzfRg<CR>
+" keyboard mappings
+nnoremap <silent> <Leader>mm :FzfMaps<CR>
+nnoremap q: :FzfHistory:<CR>
+" }}}
+
+" keyboard mappings
+nnoremap <silent> <Leader>mm :FzfMaps<CR>
+nnoremap q: :FzfHistory:<CR>
 " }}}
 " NERDTree {{{
 let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
