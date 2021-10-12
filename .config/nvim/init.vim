@@ -8,6 +8,7 @@
 " github.com/mathiasbynens/dotfiles/blob/master/.vimrc
 " viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html
 " }}}
+
 " Plugins {{{
 " Init vim-plug {{{
 call plug#begin(stdpath('data') . '/plugged')
@@ -19,6 +20,9 @@ Plug 'tpope/vim-sensible'
 Plug 'fnune/base16-vim'
 " }}}
 " Languages {{{
+Plug 'neovim/nvim-lspconfig'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'folke/trouble.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -29,7 +33,6 @@ Plug 'Olical/conjure', { 'for': 'clojure', 'tag': 'develop' }
 " }}}
 " Python {{{
 Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
-" }}}
 " }}}
 " }}}
 " Everything else {{{
@@ -45,7 +48,10 @@ Plug 'bkad/CamelCaseMotion'
 " Plug 'justinmk/vim-sneak'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'antoinemadec/coc-fzf'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
 Plug 'romainl/vim-qf'
@@ -311,66 +317,13 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 nmap <localleader>rn <Plug>(coc-rename)
-
-xmap <localleader>f  <Plug>(coc-format-selected)
-nmap <localleader>f  <Plug>(coc-format-selected)
-
-" nnoremap <silent> K :call <SID>show_doc()<CR>
+xmap <localleader>=  <Plug>(coc-format-selected)
 nnoremap <silent><localleader>hh :call <SID>show_documentation()<CR>
-" nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-" nnoremap <silent><localleader>gg :call CocAction('jumpDefinition')<CR>
-" nnoremap <silent><localleader>gl :call CocAction('jumpDeclaration')<CR>
-" nnoremap <silent><localleader>gi :call CocAction('jumpImplementation')<CR>
-" nnoremap <silent><localleader>gr <Plug>(coc-references)
-nmap <silent><localleader>gg <Plug>(coc-definition)
-nmap <silent><localleader>gy <Plug>(coc-type-definition)
-nmap <silent><localleader>gi <Plug>(coc-implementation)
-nmap <silent><localleader>gr <Plug>(coc-references)
-
-" Search workspace symbols.
-nnoremap <silent><localleader>gs  :<C-u>CocList -I symbols<cr>
-nnoremap <silent><localleader>gf  :<C-u>CocList outline methods<cr>
-nnoremap <silent><localleader>gc  :<C-u>CocList commands<cr>
-
-nnoremap <silent><nowait> <localleader>ga  :<C-u>CocFzfList diagnostics<cr>
-nmap <silent><localleader>ge <Plug>(coc-diagnostic-info)
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-" nmap <localleader>qf <Plug>(coc-fix-current)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " Other helpful stuff
-" nnoremap <silent><localleader>gc :call CocAction('codeAction')<CR>
-" nnoremap <silent><localleader>gR :call CocAction('rename')<CR>
-" nnoremap <silent><localleader>gq :call CocAction('quickfixes')<CR>
-" nnoremap <silent><localleader>,. :call CocActionAsync('format')<CR>
-" nnoremap <silent><localleader>gL :CocFzfList<CR>
-
-" Highlight the symbol and its references when holding the cursor.
-" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Clojure stuff {{{
-nnoremap <silent> <localleader>rrc :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'cycle-coll', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> <localleader>rrn :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'clean-ns', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> <localleader>rrp :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'cycle-privacy', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> <localleader>rrf :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'extract-function', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Function name: ')]})<CR>
-
-nnoremap <silent> <localleader>rth :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-first', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> <localleader>rtt :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-last', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> <localleader>rtf :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-first-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> <localleader>rtl :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-last-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> <localleader>rtw :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'unwind-thread', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> <localleader>rta :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'unwind-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-
-nnoremap <silent> <localleader>rlm :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'move-to-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')]})<CR>
-nnoremap <silent> <localleader>rli :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'introduce-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')]})<CR>
-nnoremap <silent> <localleader>rle :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'expand-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-
 nnoremap <silent> <localleader>ram :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'add-missing-libspec', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> <localleader>ros :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'inline-symbol', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
 " }}}
 " }}}
 " Conjure {{{
@@ -380,27 +333,25 @@ highlight! link NormalFloat StatusLine
 " }}}
 " fzf {{{
 let g:fzf_command_prefix = 'Fzf'
-nnoremap <silent> <Leader>pf :FzfGFiles<CR>
-nnoremap <silent> <Leader>bb :FzfBuffers<CR>
-" old files and open buffers
-nnoremap <silent> <Leader>bB :FzfHistory<CR>
-nnoremap <silent> <Leader>ff :FZF %:p:h<CR>
 nnoremap <silent> <Leader>is :FzfSnippets<CR>
-nnoremap <silent> <Leader>ss :FzfHistory/<CR>
-nnoremap <silent> <Leader>ss :FzfHistory/<CR>
-" Fuzzy search inside files with ag
-nnoremap <silent> <Leader>/ag :FzfAg<CR>
-" Regezp search inside files with ripgrep
-nnoremap <silent> <Leader>/rg :FzfRg<CR>
-" keyboard mappings
-nnoremap <silent> <Leader>mm :FzfMaps<CR>
-nnoremap q: :FzfHistory:<CR>
+" }}}
+" Telescope {{{
+nnoremap <Leader>pf <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <Leader>bb <cmd>lua require('telescope.builtin').buffers()<cr>
+" old files and open buffers
+nnoremap <Leader>bB <cmd>lua require('telescope.builtin').oldfiles()<cr>
+nnoremap <Leader>pb <cmd>lua require('telescope.builtin').file_browser()<cr>
+" nnoremap <silent> <Leader>ff :FZF %:p:h<CR>
+nnoremap <Leader>ff <cmd>lua require('telescope.builtin').find_files( { cwd = vim.fn.expand('%:p:h') })<cr>
+nnoremap q: <cmd>lua require('telescope.builtin').command_history()<cr>
+nnoremap <silent> <Leader>ss <cmd>lua require('telescope.builtin').search_history()<cr>
+nnoremap <silent> <Leader>/ <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <silent> <Leader>mm <cmd>lua require('telescope.builtin').keymaps()<cr>
+nnoremap <leader>* <cmd>lua require('telescope.builtin').grep_string({search = vim.fn.expand("<cword>")})<cr>
+
 " }}}
 
-" keyboard mappings
-nnoremap <silent> <Leader>mm :FzfMaps<CR>
-nnoremap q: :FzfHistory:<CR>
-" }}}
+
 " NERDTree {{{
 let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
 let NERDChristmasTree = 1
@@ -499,12 +450,40 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 " }}}
+" }}}
 " Autocmds {{{
 " Actions on opening a new buffer {{{
 augroup Buf-Win-Enter
     autocmd!
     autocmd BufWinEnter * call ColorColumnPerFileType() | call RegExpEnginePerFileType() | call SynMaxColPerFileType()
 augroup END
+" }}}
+" LSP {{{
+" Clojure {{{
+"lua << EOF
+"require'lspconfig'.clojure_lsp.setup{}
+"EOF
+
+lua << EOF
+require("trouble").setup {
+-- your configuration comes here
+-- or leave it empty to use the default settings
+-- refer to the configuration section below
+}
+EOF
+
+nmap <silent><localleader>gG <cmd>lua require'lspconfig'.clojure_lsp.setup{}<cr>
+nmap <silent><localleader>gg <cmd>lua require('telescope.builtin').lsp_definitions()<cr>
+
+nmap <silent><localleader>gi <cmd>lua require('telescope.builtin').lsp_implementations()<cr>
+nmap <silent><localleader>gr <cmd>lua require('telescope.builtin').lsp_references()<cr>
+nmap <silent><localleader>gf <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
+nmap <silent><localleader>gs <cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>
+nmap <silent><localleader>gc <cmd>lua require('telescope.builtin').lsp_code_actions()<cr>
+nmap <silent><localleader>eL <cmd>Trouble lsp_workspace_diagnostics<cr>
+nmap <silent><localleader>el <cmd>Trouble lsp_document_diagnostics<cr>
+
+" }}}
 " }}}
 " Filetype actions {{{
 augroup FileTypeActions
@@ -537,6 +516,5 @@ autosave.setup(
     }
 )
 EOF
-" }}}
 " }}}
 
