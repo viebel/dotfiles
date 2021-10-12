@@ -33,6 +33,7 @@ Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
 " }}}
 " }}}
 " Everything else {{{
+Plug 'junegunn/vim-peekaboo'
 Plug 'kien/ctrlp.vim'
 Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-speeddating'
@@ -315,7 +316,7 @@ xmap <localleader>f  <Plug>(coc-format-selected)
 nmap <localleader>f  <Plug>(coc-format-selected)
 
 " nnoremap <silent> K :call <SID>show_doc()<CR>
-nnoremap <silent><localleader>dh :call <SID>show_documentation()<CR>
+nnoremap <silent><localleader>hh :call <SID>show_documentation()<CR>
 " nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 " nnoremap <silent><localleader>gg :call CocAction('jumpDefinition')<CR>
@@ -326,6 +327,11 @@ nmap <silent><localleader>gg <Plug>(coc-definition)
 nmap <silent><localleader>gy <Plug>(coc-type-definition)
 nmap <silent><localleader>gi <Plug>(coc-implementation)
 nmap <silent><localleader>gr <Plug>(coc-references)
+
+" Search workspace symbols.
+nnoremap <silent><localleader>gs  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><localleader>gf  :<C-u>CocList outline methods<cr>
+nnoremap <silent><localleader>gc  :<C-u>CocList commands<cr>
 
 nnoremap <silent><nowait> <localleader>ga  :<C-u>CocFzfList diagnostics<cr>
 nmap <silent><localleader>ge <Plug>(coc-diagnostic-info)
