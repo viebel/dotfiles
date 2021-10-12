@@ -123,6 +123,9 @@ inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
+" Quickly open/reload vim
+nnoremap <leader>ev :e $MYVIMRC<CR>  
+nnoremap <leader>sv :source $MYVIMRC<CR>    
 " yank buffer name
 " relative path (src/foo.txt)
 nnoremap <leader>cf :let @+=expand("%")<CR>
