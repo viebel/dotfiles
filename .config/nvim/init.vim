@@ -105,6 +105,8 @@ let mapleader=" "
 let maplocalleader=","
 cabbrev vhelp vert help
 
+nnoremap <leader><tab> <C-^>
+
 inoremap jk <Esc>
 inoremap jj <Esc>
 inoremap fd <Esc>
