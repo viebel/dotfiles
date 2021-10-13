@@ -107,9 +107,9 @@ cabbrev vhelp vert help
 
 nnoremap <leader><tab> <C-^>
 
-inoremap jk <Esc>
-inoremap jj <Esc>
 inoremap fd <Esc>
+nnoremap fd <Esc>
+xnoremap fd <Esc>
 
 "Insert single character with Space
 " nnoremap <Space> i_<Esc>r
@@ -326,7 +326,7 @@ nnoremap <silent><localleader>hh :call <SID>show_documentation()<CR>
 " Other helpful stuff
 
 " Clojure stuff {{{
-nnoremap <silent> <localleader>ram :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'add-missing-libspec', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> <localleader>ram :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'add-missing-libspec', 'arguments': [expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
 " }}}
 " }}}
 " Conjure {{{
@@ -463,9 +463,9 @@ augroup END
 " }}}
 " LSP {{{
 " Clojure {{{
-"lua << EOF
-"require'lspconfig'.clojure_lsp.setup{}
-"EOF
+lua << EOF
+require'lspconfig'.clojure_lsp.setup{}
+EOF
 
 lua << EOF
 require("trouble").setup {
