@@ -20,6 +20,7 @@ Plug 'tpope/vim-sensible'
 Plug 'fnune/base16-vim'
 " }}}
 " Languages {{{
+Plug 'matcatc/vim-asciidoc-folding'
 Plug 'neovim/nvim-lspconfig'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'folke/trouble.nvim'
