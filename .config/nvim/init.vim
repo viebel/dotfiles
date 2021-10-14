@@ -339,6 +339,7 @@ let g:fzf_command_prefix = 'Fzf'
 nnoremap <silent> <Leader>is :FzfSnippets<CR>
 " }}}
 " Telescope {{{
+nnoremap <Leader>rl <cmd>lua require('telescope.builtin').resume()<cr>
 nnoremap <Leader>pf <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <Leader>bb <cmd>lua require('telescope.builtin').buffers()<cr>
 " old files and open buffers
