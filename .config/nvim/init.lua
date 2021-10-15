@@ -349,3 +349,10 @@ require('orgmode').setup({
   org_agenda_files = {'~/Dropbox/TODOS/*'},
     org_default_notes_file = '~/Dropbox/TODOS/refile.org',
 })
+
+-- Firenvim
+if vim.g.started_by_firenvim then
+  vim.o.guifont = "Iosevka:h20"
+  vim.o.laststatus = 0
+end
+
