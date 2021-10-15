@@ -168,62 +168,9 @@ sunmap w
 sunmap b
 sunmap e
 " }}}
-" CoC {{{
-let g:coc_global_extensions = [
-            \ 'coc-diagnostic',
-            \ 'coc-json',
-            \ ]
-
-highlight! link LineNr StatusLine
-highlight! link CocErrorHighlight NONE
-highlight! link CocWarningHighlight NONE
-highlight! link CocInfoHighlight NONE
-highlight! link CocHintHighlight NONE
-
-function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-    else
-        call CocAction('doHover')
-    endif
-endfunction
-
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-nmap <localleader>rn <Plug>(coc-rename)
-xmap <localleader>=  <Plug>(coc-format-selected)
-nnoremap <silent><localleader>hh :call <SID>show_documentation()<CR>
 
 " Other helpful stuff
 
-" Clojure stuff {{{
-nnoremap <silent> <localleader>ram :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'add-missing-libspec', 'arguments': [expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-" }}}
-" }}}
-" Conjure {{{
-let g:sexp_insert_after_wrap  = v:false
-let g:conjure#mapping#def_word = v:false
-highlight! link NormalFloat StatusLine
-" }}}
-
-" NERDTree {{{
-let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
-let NERDChristmasTree = 1
-let NERDTreeShowHidden = 1
-let NERDTreeChDirMode = 1
-let NERDTreeShowFiles = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeWinPos = 'right'
-let NERDTreeIgnore = [
-            \ '.DS_Store', '\.swp$', '\~$', '.empty',
-            \ '\.jpg$', '\.jpeg$', '\.png$', '\.gif$', '\.pdf$',
-            \ '\.class$',
-            \ '\.a$', '\.o$', '\.so$',
-            \ '\.pyc$', '\.pyo$',
-            \ '\.tags$'
-            \ ]
-
-" }}}
 " Quickfix {{{
 nmap <Leader>q <Plug>(qf_qf_toggle)
 nmap <Leader>l <Plug>(qf_loc_toggle)

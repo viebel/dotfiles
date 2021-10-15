@@ -56,6 +56,9 @@ require('packer').startup(function()
   use 'Xuyuanp/nerdtree-git-plugin'
   use 'ryanoasis/vim-devicons'
   use 'tiagofumo/vim-nerdtree-syntax-highlight'
+  use 'guns/vim-sexp'
+-- use 'tpope/vim-sexp-mappings-for-regular-people'
+
 end)
 
 --Incremental live completion (note: this is now a default on master)
