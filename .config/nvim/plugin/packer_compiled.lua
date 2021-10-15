@@ -69,17 +69,18 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  LuaSnip = {
+  ["AutoSave.nvim"] = {
     loaded = true,
-    path = "/home/viebel/.local/share/nvim/site/pack/packer/start/LuaSnip"
+    path = "/home/viebel/.local/share/nvim/site/pack/packer/start/AutoSave.nvim"
   },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "/home/viebel/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp"
   },
-  cmp_luasnip = {
-    loaded = true,
-    path = "/home/viebel/.local/share/nvim/site/pack/packer/start/cmp_luasnip"
+  conjure = {
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/viebel/.local/share/nvim/site/pack/packer/opt/conjure"
   },
   ["gitsigns.nvim"] = {
     loaded = true,
@@ -109,6 +110,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/viebel/.local/share/nvim/site/pack/packer/start/nvim-treesitter-textobjects"
   },
+  ["nvim-ts-rainbow"] = {
+    loaded = true,
+    path = "/home/viebel/.local/share/nvim/site/pack/packer/start/nvim-ts-rainbow"
+  },
   ["onedark.vim"] = {
     loaded = true,
     path = "/home/viebel/.local/share/nvim/site/pack/packer/start/onedark.vim"
@@ -133,13 +138,29 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/viebel/.local/share/nvim/site/pack/packer/start/ultisnips"
   },
+  ["vim-asciidoc-folding"] = {
+    loaded = true,
+    path = "/home/viebel/.local/share/nvim/site/pack/packer/start/vim-asciidoc-folding"
+  },
   ["vim-commentary"] = {
     loaded = true,
     path = "/home/viebel/.local/share/nvim/site/pack/packer/start/vim-commentary"
   },
+  ["vim-exchange"] = {
+    loaded = true,
+    path = "/home/viebel/.local/share/nvim/site/pack/packer/start/vim-exchange"
+  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/home/viebel/.local/share/nvim/site/pack/packer/start/vim-fugitive"
+  },
+  ["vim-peekaboo"] = {
+    loaded = true,
+    path = "/home/viebel/.local/share/nvim/site/pack/packer/start/vim-peekaboo"
+  },
+  ["vim-polyglot"] = {
+    loaded = true,
+    path = "/home/viebel/.local/share/nvim/site/pack/packer/start/vim-polyglot"
   },
   ["vim-rhubarb"] = {
     loaded = true,
@@ -148,10 +169,21 @@ _G.packer_plugins = {
   ["vim-snippets"] = {
     loaded = true,
     path = "/home/viebel/.local/share/nvim/site/pack/packer/start/vim-snippets"
+  },
+  ["vim-surround"] = {
+    loaded = true,
+    path = "/home/viebel/.local/share/nvim/site/pack/packer/start/vim-surround"
   }
 }
 
 time([[Defining packer_plugins]], false)
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Filetype lazy-loads
+time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType clojure ++once lua require("packer.load")({'conjure'}, { ft = "clojure" }, _G.packer_plugins)]]
+time([[Defining lazy-load filetype autocommands]], false)
+vim.cmd("augroup END")
 if should_profile then save_profiles() end
 
 end)

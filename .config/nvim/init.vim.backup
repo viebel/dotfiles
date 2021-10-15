@@ -1,18 +1,4 @@
-" Sources {{{
-" vi-improved.org/vimrc.php
-" github.com/carlhuda/janus
-" github.com/gmarik/vimfiles/blob/master/vimrc
-" github.com/durdn/cfg/blob/master/.vimrc
-" github.com/factorylabs/vimfiles
-" github.com/lukerandall/dotvim/blob/master/vimrc
-" github.com/mathiasbynens/dotfiles/blob/master/.vimrc
-" viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html
-" }}}
-
 " Plugins {{{
-" Init vim-plug {{{
-call plug#begin(stdpath('data') . '/plugged')
-" }}}
 " Sane defaults {{{
 Plug 'tpope/vim-sensible'
 " }}}
@@ -20,71 +6,26 @@ Plug 'tpope/vim-sensible'
 Plug 'fnune/base16-vim'
 " }}}
 " Languages {{{
-Plug 'matcatc/vim-asciidoc-folding'
-Plug 'neovim/nvim-lspconfig'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'folke/trouble.nvim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/playground'
-Plug 'p00f/nvim-ts-rainbow'
-" Clojure {{{
-Plug 'Olical/conjure', { 'for': 'clojure', 'tag': 'develop' }
-" }}}
-" Python {{{
-Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
-" }}}
 " }}}
 " Everything else {{{
-Plug 'junegunn/vim-peekaboo'
-Plug 'kien/ctrlp.vim'
-Plug 'jceb/vim-orgmode'
-Plug 'tpope/vim-speeddating'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
-Plug 'bkad/CamelCaseMotion'
 " Plug 'justinmk/vim-sneak'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-
-Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
 Plug 'romainl/vim-qf'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
 Plug 'ryanoasis/vim-devicons', { 'on':  'NERDTreeToggle' }
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on':  'NERDTreeToggle' }
-Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'guns/vim-sexp'
 " Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'Pocco81/AutoSave.nvim'
-Plug 'tommcdo/vim-exchange'
 " }}}
 
-" Finish Init vim-plug {{{
-call plug#end()
-" }}}
-" Options {{{
-" set autochdir
-" }}}
-
-" Colors {{{
-let base16colorspace=256
-colorscheme base16-eighties
-" }}}
 " Spaces {{{
 set expandtab tabstop=4 softtabstop=4 shiftwidth=4
 " }}}
@@ -105,78 +46,12 @@ let mapleader=" "
 let maplocalleader=","
 cabbrev vhelp vert help
 
-nnoremap <leader><tab> <C-^>
 
-inoremap fd <Esc>
-nnoremap fd <Esc>
-xnoremap fd <Esc>
 
-"Insert single character with Space
-" nnoremap <Space> i_<Esc>r
 
-nnoremap j gj
-nnoremap k gk
-
-nnoremap <silent> <C-j> <C-W>j
-nnoremap <silent> <C-k> <C-W>k
-nnoremap <silent> <C-h> <C-W>h
-nnoremap <silent> <C-l> <C-W>l
-
-nnoremap <c-]> g<c-]>
-vnoremap <c-]> g<c-]>
-
-" move lines up and down
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
-
-" Quickly open/reload vim
-nnoremap <leader>ev :e $MYVIMRC<CR>  
-nnoremap <leader>sv :source $MYVIMRC<CR>    
-" yank buffer name
-" relative path (src/foo.txt)
-nnoremap <leader>cf :let @+=expand("%")<CR>
-" absolute path (/something/src/foo.txt)
-nnoremap <leader>cF :let @+=expand("%:p")<CR>
-" filename (foo.txt)
-nnoremap <leader>ct :let @+=expand("%:t")<CR>
-" directory name (/something/src)
-nno <leader>ch :let @+=expand("%:p:h")<CR>
-
-" inoremap 1 !
-" inoremap 2 @
-" inoremap 3 #
-" inoremap 4 $
-" inoremap 5 %
-" inoremap 6 ^
-" inoremap 7 &
-" inoremap 8 *
-" inoremap 9 (
-" inoremap 0 )
-" inoremap - _
-
-" inoremap ! 1
-" inoremap @ 2
-" inoremap # 3
-" inoremap $ 4
-" inoremap % 5
-" inoremap ^ 6
-" inoremap & 7
-" inoremap * 8
-" inoremap ( 9
-" inoremap ) 0
-" inoremap _ -
-" }}}
 " Searching {{{
-set smartcase
-set ignorecase
-set nohlsearch
 set gdefault
 set wildmode=list:longest
-set wildignorecase
 " }}}
 " Format {{{
 set wrap
@@ -426,34 +301,6 @@ let g:tagbar_type_markdown = {
     \ 'sort': 0,
 \ }
 " }}}
-" Treesitter {{{
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
-  -- Modules and its options go here
-  highlight = {
-    enable = true,
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
-    }
-  },
-  indent = {
-    enable = true,
-  },
-  rainbow = {
-    enable = true,
-    extended_mode = false,
-    max_file_lines = 4000
-  }
-}
-EOF
-" }}}
 " }}}
 " Autocmds {{{
 " Actions on opening a new buffer {{{
@@ -461,33 +308,6 @@ augroup Buf-Win-Enter
     autocmd!
     autocmd BufWinEnter * call ColorColumnPerFileType() | call RegExpEnginePerFileType() | call SynMaxColPerFileType()
 augroup END
-" }}}
-" LSP {{{
-" Clojure {{{
-lua << EOF
-require'lspconfig'.clojure_lsp.setup{}
-EOF
-
-lua << EOF
-require("trouble").setup {
--- your configuration comes here
--- or leave it empty to use the default settings
--- refer to the configuration section below
-}
-EOF
-
-nmap <silent><localleader>gG <cmd>lua require'lspconfig'.clojure_lsp.setup{}<cr>
-nmap <silent><localleader>gg <cmd>lua require('telescope.builtin').lsp_definitions()<cr>
-
-nmap <silent><localleader>gi <cmd>lua require('telescope.builtin').lsp_implementations()<cr>
-nmap <silent><localleader>gr <cmd>lua require('telescope.builtin').lsp_references()<cr>
-nmap <silent><localleader>gf <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
-nmap <silent><localleader>gs <cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>
-nmap <silent><localleader>gc <cmd>lua require('telescope.builtin').lsp_code_actions()<cr>
-nmap <silent><localleader>eL <cmd>Trouble lsp_workspace_diagnostics<cr>
-nmap <silent><localleader>el <cmd>Trouble lsp_document_diagnostics<cr>
-
-" }}}
 " }}}
 " Filetype actions {{{
 augroup FileTypeActions
@@ -497,28 +317,5 @@ augroup FileTypeActions
     autocmd FileType qf setlocal wrap
 augroup END
 " }}}
-" }}}
-" AutoSave {{{
-lua << EOF
-local autosave = require("autosave")
-
-autosave.setup(
-    {
-        enabled = true,
-        execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
-        events = {"InsertLeave", "TextChanged"},
-        conditions = {
-            exists = true,
-            filename_is_not = {},
-            filetype_is_not = {},
-            modifiable = true
-        },
-        write_all_buffers = false,
-        on_off_commands = true,
-        clean_command_line_interval = 0,
-        debounce_delay = 135
-    }
-)
-EOF
 " }}}
 

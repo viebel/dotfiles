@@ -40,6 +40,15 @@ require('packer').startup(function()
   use 'hrsh7th/cmp-nvim-lsp'
   use 'SirVer/ultisnips'
   use 'honza/vim-snippets'
+  use 'matcatc/vim-asciidoc-folding'
+  use 'junegunn/vim-peekaboo'
+  use 'tpope/vim-surround'
+  use 'tommcdo/vim-exchange'
+  use 'Pocco81/AutoSave.nvim'
+  use { 'Olical/conjure', ft = 'clojure' } 
+  use 'p00f/nvim-ts-rainbow'
+  use 'sheerun/vim-polyglot'
+
 end)
 
 --Incremental live completion (note: this is now a default on master)
@@ -66,6 +75,8 @@ vim.opt.undofile = true
 --Case insensitive searching UNLESS /C or capital in search
 vim.o.ignorecase = true
 vim.o.smartcase = true
+vim.o.linebreak = true
+vim.o.relativenumber = true
 
 --Decrease update time
 vim.o.updatetime = 250
@@ -76,6 +87,9 @@ vim.o.termguicolors = true
 vim.g.onedark_terminal_italics = 2
 vim.cmd [[colorscheme onedark]]
 
+--Folding
+vim.o.foldmethod = "expr"
+
 --Set statusbar
 vim.g.lightline = {
   colorscheme = 'onedark',
@@ -83,6 +97,7 @@ vim.g.lightline = {
   component_function = { gitbranch = 'fugitive#head' },
 }
 
+local keyopts = { noremap = true, silent = true, exp = true } 
 --Remap space as leader key
 vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
 vim.g.mapleader = ' '
@@ -91,7 +106,66 @@ vim.g.maplocalleader = ','
 --Remap for dealing with word wrap
 vim.api.nvim_set_keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
 vim.api.nvim_set_keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader><tab>', '<C-^>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', 'fd', '<Esc>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'fd', '<Esc>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('x', 'fd', '<Esc>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('x', 'fd', '<Esc>', { noremap = true, silent = true })
 
+-- Window management and navigation
+vim.api.nvim_set_keymap('n', '<leader>wj', '<C-W>j', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>wk', '<C-W>k', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>wh', '<C-W>h', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>wl', '<C-W>l', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ww', '<C-W><C-W>', { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('n', '<leader>wJ', '<C-W>J', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>wK', '<C-W>K', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>wH', '<C-W>H', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>wL', '<C-W>L', { noremap = true, silent = true })
+
+-- Move lines up and down
+vim.api.nvim_set_keymap('n', '<A-j>', ':m .+1<CR>==', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-k>', ':m .-2<CR>==', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<A-j>', '<Esc>:m .+1<CR>==gi', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<A-k>', '<Esc>:m .-2<CR>==gi', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<A-j>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<A-k>', ":m '>-2<CR>gv=gv", { noremap = true, silent = true })
+
+-- Quickly open/reload vim
+vim.api.nvim_set_keymap('n', '<leader>ev', ':e $MYVIMRC<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>sv', ':source $MYVIMRC<CR>', { noremap = true, silent = true })
+
+-- yank buffer name
+-- relative path (src/foo.txt)
+vim.api.nvim_set_keymap('n', '<leader>yf', ':let @"=expand("%")<CR>', { noremap = true, silent = true })
+-- absolute path (/something/src/foo.txt)
+vim.api.nvim_set_keymap('n', '<leader>yF', ':let @"=expand("%:p")<CR>', { noremap = true, silent = true })
+-- filename (foo.txt)
+vim.api.nvim_set_keymap('n', '<leader>yb', ':let @"=expand("%:t")<CR>', { noremap = true, silent = true })
+-- directory name (/something/src)
+vim.api.nvim_set_keymap('n', '<leader>yd', ':let @"=expand("%:p:h")<CR>', { noremap = true, silent = true })
+
+-- autosave
+local autosave = require("autosave")
+
+autosave.setup(
+    {
+        enabled = true,
+        execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
+        events = {"InsertLeave", "TextChanged"},
+        conditions = {
+            exists = true,
+            filename_is_not = {},
+            filetype_is_not = {},
+            modifiable = true
+        },
+        write_all_buffers = true,
+        on_off_commands = true,
+        clean_command_line_interval = 0,
+        debounce_delay = 135
+    }
+)
 -- Highlight on yank
 vim.api.nvim_exec(
   [[
@@ -155,6 +229,7 @@ vim.api.nvim_set_keymap('n', '<leader>mm', [[<cmd>lua require('telescope.builtin
 -- Treesitter configuration
 -- Parsers must be installed manually via :TSInstall
 require('nvim-treesitter.configs').setup {
+	ensure_installed = "maintained",
   highlight = {
     enable = true, -- false will disable the whole extension
   },
@@ -169,6 +244,11 @@ require('nvim-treesitter.configs').setup {
   },
   indent = {
     enable = true,
+  },
+  rainbow = {
+	  enable = true,
+	  extended_mode = false,
+	  max_file_lines = 4000
   },
   textobjects = {
     select = {
@@ -250,4 +330,5 @@ end
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
+
 
