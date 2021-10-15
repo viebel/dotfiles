@@ -15,10 +15,6 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 " Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-signify'
 Plug 'romainl/vim-qf'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
-Plug 'ryanoasis/vim-devicons', { 'on':  'NERDTreeToggle' }
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
@@ -209,27 +205,6 @@ let g:sexp_insert_after_wrap  = v:false
 let g:conjure#mapping#def_word = v:false
 highlight! link NormalFloat StatusLine
 " }}}
-" fzf {{{
-let g:fzf_command_prefix = 'Fzf'
-nnoremap <silent> <Leader>is :FzfSnippets<CR>
-" }}}
-" Telescope {{{
-nnoremap <Leader>rl <cmd>lua require('telescope.builtin').resume()<cr>
-nnoremap <Leader>pf <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <Leader>bb <cmd>lua require('telescope.builtin').buffers()<cr>
-" old files and open buffers
-nnoremap <Leader>bB <cmd>lua require('telescope.builtin').oldfiles()<cr>
-nnoremap <Leader>pb <cmd>lua require('telescope.builtin').file_browser()<cr>
-" nnoremap <silent> <Leader>ff :FZF %:p:h<CR>
-nnoremap <Leader>ff <cmd>lua require('telescope.builtin').find_files( { cwd = vim.fn.expand('%:p:h') })<cr>
-nnoremap q: <cmd>lua require('telescope.builtin').command_history()<cr>
-nnoremap <silent> <Leader>ss <cmd>lua require('telescope.builtin').search_history()<cr>
-nnoremap <silent> <Leader>/ <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <silent> <Leader>mm <cmd>lua require('telescope.builtin').keymaps()<cr>
-nnoremap <leader>* <cmd>lua require('telescope.builtin').grep_string({search = vim.fn.expand("<cword>")})<cr>
-
-" }}}
-
 
 " NERDTree {{{
 let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
@@ -248,7 +223,6 @@ let NERDTreeIgnore = [
             \ '\.tags$'
             \ ]
 
-noremap <silent> <Leader>n :NERDTreeToggle<CR>
 " }}}
 " Quickfix {{{
 nmap <Leader>q <Plug>(qf_qf_toggle)

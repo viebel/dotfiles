@@ -52,6 +52,10 @@ require('packer').startup(function()
           require('orgmode').setup{}
   end
   }
+  use 'scrooloose/nerdtree'
+  use 'Xuyuanp/nerdtree-git-plugin'
+  use 'ryanoasis/vim-devicons'
+  use 'tiagofumo/vim-nerdtree-syntax-highlight'
 end)
 
 --Incremental live completion (note: this is now a default on master)
@@ -151,6 +155,9 @@ vim.api.nvim_set_keymap('n', '<leader>yd', ':let @"=expand("%:p:h")<CR>', { nore
 
 -- autosave
 local autosave = require("autosave")
+
+-- NERDTree
+vim.api.nvim_set_keymap('n', '<leader>n', ':NERDTreeToggle %:h<CR>', { noremap = true, silent = true })
 
 autosave.setup(
     {
