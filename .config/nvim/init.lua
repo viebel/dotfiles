@@ -48,7 +48,10 @@ require('packer').startup(function()
   use { 'Olical/conjure', ft = 'clojure' } 
   use 'p00f/nvim-ts-rainbow'
   use 'sheerun/vim-polyglot'
-
+  use {'kristijanhusak/orgmode.nvim', config = function()
+          require('orgmode').setup{}
+  end
+  }
 end)
 
 --Incremental live completion (note: this is now a default on master)
@@ -331,4 +334,9 @@ end
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
-
+-- Org
+-- init.lua
+require('orgmode').setup({
+  org_agenda_files = {'~/Dropbox/TODOS/*'},
+    org_default_notes_file = '~/Dropbox/TODOS/refile.org',
+})
