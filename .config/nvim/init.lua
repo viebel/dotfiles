@@ -48,16 +48,9 @@ require('packer').startup(function()
   use { 'Olical/conjure', ft = 'clojure' } 
   use 'p00f/nvim-ts-rainbow'
   use 'sheerun/vim-polyglot'
-  use {'kristijanhusak/orgmode.nvim', config = function()
-          require('orgmode').setup{}
-  end
+  use {'kristijanhusak/orgmode.nvim',
+    run = function() vim.fn['firenvim#install'](0) end 
   }
-  use 'scrooloose/nerdtree'
-  use 'Xuyuanp/nerdtree-git-plugin'
-  use 'ryanoasis/vim-devicons'
-  use 'tiagofumo/vim-nerdtree-syntax-highlight'
-  use 'guns/vim-sexp'
--- use 'tpope/vim-sexp-mappings-for-regular-people'
 
 end)
 
@@ -128,6 +121,9 @@ vim.api.nvim_set_keymap('n', '<leader>wk', '<C-W>k', { noremap = true, silent = 
 vim.api.nvim_set_keymap('n', '<leader>wh', '<C-W>h', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>wl', '<C-W>l', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ww', '<C-W><C-W>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>w/', ':vsplit<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>w-', ':split<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>wd', ':hide<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<leader>wJ', '<C-W>J', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>wK', '<C-W>K', { noremap = true, silent = true })
@@ -223,14 +219,17 @@ require('telescope').setup {
   },
 }
 
---Add leader shortcuts
+-- Buffer management
+vim.api.nvim_set_keymap('n', '<leader>bd', ':bn<CR>bd#<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>bb', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>bB', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>bB', [[<cmd>lua require('telescope.builtin').find_files( { cwd = vim.fn.expand('%:p:h') })<CR>]], { noremap = true, silent = true })
+
+-- Telescope stuff
 vim.api.nvim_set_keymap('n', '<leader>rl', [[<cmd>lua require('telescope.builtin').resume()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>pf', [[<cmd>lua require('telescope.builtin').find_files()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files({ cwd = vim.fn.expand('%:p:h') })<CR>]], { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<leader>bb', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>bB', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>bB', [[<cmd>lua require('telescope.builtin').find_files( { cwd = vim.fn.expand('%:p:h') })<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'q:', [[<cmd>lua require('telescope.builtin').command_history()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>s/', [[<cmd>lua require('telescope.builtin').search_history()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ss', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], { noremap = true, silent = true })
