@@ -55,11 +55,12 @@ require('packer').startup(function()
   use { 'Olical/conjure', ft = 'clojure' } 
   use 'p00f/nvim-ts-rainbow'
   use 'sheerun/vim-polyglot'
+  use { 'neoclide/coc.nvim', branch= 'release' }
+  use {'junegunn/fzf',  run = function() vim.fn['fzf#install']() end}
+  use 'junegunn/fzf.vim'
+  use 'antoinemadec/coc-fzf'
   use 'kristijanhusak/orgmode.nvim'
-  use {
-    'glacambre/firenvim',
-    run = function() vim.fn['firenvim#install'](0) end 
-  }
+  use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
 end)
 
 --Incremental live completion (note: this is now a default on master)
@@ -170,6 +171,10 @@ local autosave = require("autosave")
 -- NERDTree
 vim.api.nvim_set_keymap('n', '<leader>n', ':NERDTreeToggle %:h<CR>', { noremap = true, silent = true })
 
+-- COC settings for stuff not working with native LSP
+vim.api.nvim_command [[nmap <localleader>gn <Plug>(coc-rename)]]
+
+-- Autosave
 autosave.setup(
     {
         enabled = true,
@@ -320,7 +325,7 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>hh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>gn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+--  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>gn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>gf', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>gs', [[<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<CR>]], opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>ga', [[<cmd>lua require('telescope.builtin').lsp_code_actions()<CR>]], opts)
