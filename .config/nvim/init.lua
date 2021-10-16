@@ -122,6 +122,7 @@ vim.api.nvim_set_keymap('i', 'fd', '<Esc>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'fd', '<Esc>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('x', 'fd', '<Esc>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('x', 'fd', '<Esc>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'ff', ':q<CR>', { noremap = true, silent = true })
 
 -- Window management and navigation
 vim.api.nvim_set_keymap('n', '<leader>wj', '<C-W>j', { noremap = true, silent = true })
