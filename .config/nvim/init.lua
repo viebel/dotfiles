@@ -152,6 +152,9 @@ vim.api.nvim_set_keymap('n', '<leader>yb', ':let @"=expand("%:t")<CR>', { norema
 -- directory name (/something/src)
 vim.api.nvim_set_keymap('n', '<leader>yd', ':let @"=expand("%:p:h")<CR>', { noremap = true, silent = true })
 
+-- Completion
+vim.api.nvim_set_keymap('i', '<C-o>', '<C-x><C-o>', { noremap = true, silent = true })
+
 -- autosave
 local autosave = require("autosave")
 
@@ -300,6 +303,7 @@ require('nvim-treesitter.configs').setup {
 -- LSP settings
 local nvim_lsp = require 'lspconfig'
 local on_attach = function(_, bufnr)
+  print("LSP initialized")
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   local opts = { noremap = false, silent = true }
@@ -307,6 +311,7 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>hh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>gn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>gf', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>gs', [[<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<CR>]], opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>ga', [[<cmd>lua require('telescope.builtin').lsp_code_actions()<CR>]], opts)
@@ -324,12 +329,13 @@ local on_attach = function(_, bufnr)
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end
 
+
 -- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Enable the following language servers
-local servers = { 'clangd', 'clojure_lsp', 'rust_analyzer', 'pyright', 'tsserver' }
+local servers = { 'clojure_lsp' }
 if not vim.lsp_loaded then
 	for _, lsp in ipairs(servers) do
 		nvim_lsp[lsp].setup {
