@@ -35,6 +35,10 @@ require('packer').startup(function()
   use 'nvim-treesitter/nvim-treesitter'
   -- Additional textobjects for treesitter
   use 'nvim-treesitter/nvim-treesitter-textobjects'
+  use 'scrooloose/nerdtree'
+  use 'Xuyuanp/nerdtree-git-plugin'
+  use 'ryanoasis/vim-devicons'
+  use 'tiagofumo/vim-nerdtree-syntax-highlight'
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
   use 'hrsh7th/cmp-nvim-lsp'
