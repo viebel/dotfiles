@@ -1,5 +1,13 @@
-{:cljfmt
+{:additional-snippets [{:name "wrap-let-sexpr$"
+                        :detail "Wrap in let sexpr"
+                        :snippet "(let [$1] $0$current-form)"}
+                       {:name "spy$"
+                        :detail "Spy"
+                        :snippet "(sc.api/spy)"}]
+ :use-metadata-for-privacy? false
+ :cljfmt
  {:split-keypairs-over-multiple-lines? true
+  :remove-multiple-non-indenting-spaces? true
   :indents {against-background [[:inner 0]]
             fact               [[:block 1]]
             facts              [[:block 1]]
