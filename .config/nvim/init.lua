@@ -38,6 +38,7 @@ require('packer').startup(function()
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
   use 'hrsh7th/cmp-nvim-lsp'
+  use 'guns/vim-sexp'
   use 'SirVer/ultisnips'
   use 'honza/vim-snippets'
   use 'matcatc/vim-asciidoc-folding'
