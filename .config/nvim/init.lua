@@ -55,10 +55,11 @@ require('packer').startup(function()
   use { 'Olical/conjure', ft = 'clojure' } 
   use 'p00f/nvim-ts-rainbow'
   use 'sheerun/vim-polyglot'
-  use {'kristijanhusak/orgmode.nvim',
+  use 'kristijanhusak/orgmode.nvim'
+  use {
+    'glacambre/firenvim',
     run = function() vim.fn['firenvim#install'](0) end 
   }
-
 end)
 
 --Incremental live completion (note: this is now a default on master)
