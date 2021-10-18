@@ -152,6 +152,8 @@ vim.api.nvim_set_keymap('n', '<leader>wk', '<C-W>k', { noremap = true, silent = 
 vim.api.nvim_set_keymap('n', '<leader>wh', '<C-W>h', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>wl', '<C-W>l', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ww', '<C-W><C-W>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>w_', '<C-W>_', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>w|', '<C-W>|', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>w/', ':vsplit<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>w-', ':split<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>wd', ':hide<CR>', { noremap = true, silent = true })
