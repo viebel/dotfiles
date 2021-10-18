@@ -169,6 +169,9 @@ vim.api.nvim_set_keymap('i', '<A-k>', '<Esc>:m .-2<CR>==gi', { noremap = true, s
 vim.api.nvim_set_keymap('v', '<A-j>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<A-k>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 
+-- Break a line with <C-J>
+vim.api.nvim_set_keymap('n', '<NL>', 'i<CR><ESC>', { noremap = true, silent = true })
+
 -- Quickly open/reload vim
 vim.api.nvim_set_keymap('n', '<leader>ev', ':e $MYVIMRC<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>sv', ':source $MYVIMRC<CR>', { noremap = true, silent = true })
