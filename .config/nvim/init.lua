@@ -246,12 +246,13 @@ require('gitsigns').setup {
 }
 
 -- Telescope
+local actions = require('telescope.actions')
 require('telescope').setup {
   defaults = {
     mappings = {
       i = {
         ['<C-u>'] = false,
-        ['<C-d>'] = false,
+        ['<C-d>'] = actions.delete_buffer,
       },
     },
   },
@@ -278,6 +279,14 @@ vim.api.nvim_set_keymap('n', '<leader>sh', [[<cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap('n', '<leader>/', [[<cmd>lua require('telescope.builtin').grep_string({search = vim.fn.expand("<cword>")})<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>g/', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>mm', [[<cmd>lua require('telescope.builtin').keymaps()<CR>]], { noremap = true, silent = true })
+
+-- Git
+vim.api.nvim_set_keymap('n', '<leader>gb', [[<cmd>lua require('telescope.builtin').git_branches()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>gc', [[<cmd>lua require('telescope.builtin').git_commits()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>gf', [[<cmd>lua require('telescope.builtin').git_bcommits()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>gs', [[<cmd>lua require('telescope.builtin').git_status()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>gz', [[<cmd>lua require('telescope.builtin').git_stash()<CR>]], { noremap = true, silent = true })
+
 
 -- Treesitter configuration
 -- Parsers must be installed manually via :TSInstall
