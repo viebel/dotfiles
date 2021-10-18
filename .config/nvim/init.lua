@@ -35,10 +35,8 @@ require('packer').startup(function()
   use 'nvim-treesitter/nvim-treesitter'
   -- Additional textobjects for treesitter
   use 'nvim-treesitter/nvim-treesitter-textobjects'
-  use 'scrooloose/nerdtree'
   use 'Xuyuanp/nerdtree-git-plugin'
   use 'ryanoasis/vim-devicons'
-  use 'tiagofumo/vim-nerdtree-syntax-highlight'
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
   use 'hrsh7th/cmp-nvim-lsp'
@@ -69,6 +67,26 @@ require('packer').startup(function()
         default_register = {'"', '+', '*'},
       })
     end
+  }
+use {
+    'kyazdani42/nvim-tree.lua',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = function() require'nvim-tree'.setup {
+    view = {
+        side = 'left'
+      },
+      -- update the focused file on `BufEnter`, un-collapses the folders recursively until it finds the file
+    update_focused_file = {
+    -- enables the feature
+        enable      = true,
+    -- update the root directory of the tree to the one of the folder containing the file if the file is not under the current root directory
+    -- only relevant when `update_focused_file.enable` is true
+        update_cwd  = true,
+    -- list of buffer names / filetypes that will not update the cwd if the file isn't found under the current root directory
+    -- only relevant when `update_focused_file.update_cwd` is true and `update_focused_file.enable` is true
+        ignore_list = {}
+  }
+    } end
   }
 end)
 
@@ -198,8 +216,8 @@ vim.api.nvim_set_keymap('i', '<C-o>', '<C-x><C-o>', { noremap = true, silent = t
 -- autosave
 local autosave = require("autosave")
 
--- NERDTree
-vim.api.nvim_set_keymap('n', '<leader>n', ':NERDTreeToggle %:h<CR>', { noremap = true, silent = true })
+-- NvimTree
+vim.api.nvim_set_keymap('n', '<leader>n', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 
 -- COC settings for stuff not working with native LSP
 vim.api.nvim_command [[nmap <localleader>gn <Plug>(coc-rename)]]
