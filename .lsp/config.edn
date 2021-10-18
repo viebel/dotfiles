@@ -1,6 +1,9 @@
 {:additional-snippets [{:name "wrap-let-sexpr$"
                         :detail "Wrap in let sexpr"
                         :snippet "(let [$1] $0$current-form)"}
+                       {:name "defsc"
+                        :detail "Define a scope"
+                        :snippet "(comment (sc.api/defsc $1))"}
                        {:name "spy$"
                         :detail "Spy"
                         :snippet "(sc.api/spy)"}]
