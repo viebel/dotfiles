@@ -61,6 +61,15 @@ require('packer').startup(function()
   use 'antoinemadec/coc-fzf'
   -- use 'kristijanhusak/orgmode.nvim'
   use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
+  use { "AckslD/nvim-neoclip.lua",
+    requires = {'tami5/sqlite.lua', module = 'sqlite'},
+    config = function()
+      require('neoclip').setup({
+        enable_persistant_history = false,
+        default_register = {'"', '+', '*'},
+      })
+    end
+  }
 end)
 
 --Incremental live completion (note: this is now a default on master)
@@ -247,6 +256,9 @@ vim.api.nvim_set_keymap('n', '<leader>bd', ':bp|bd#<CR>', { noremap = true, sile
 vim.api.nvim_set_keymap('n', '<leader>bb', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>bB', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>bB', [[<cmd>lua require('telescope.builtin').find_files( { cwd = vim.fn.expand('%:p:h') })<CR>]], { noremap = true, silent = true })
+
+-- Clipboard
+vim.api.nvim_set_keymap('n', '<leader>cc', [[<cmd>lua require('telescope').extensions.neoclip.default()<CR>]], { noremap = true, silent = true })
 
 -- Telescope stuff
 vim.api.nvim_set_keymap('n', '<leader>rl', [[<cmd>lua require('telescope.builtin').resume()<CR>]], { noremap = true, silent = true })
