@@ -72,6 +72,9 @@ require('packer').startup(function()
   }
 end)
 
+-- Allow h and l to cross lines
+vim.o.whichwrap = vim.o.whichwrap .. ',l,h'
+
 --Incremental live completion (note: this is now a default on master)
 vim.o.inccommand = 'nosplit'
 
