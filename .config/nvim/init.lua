@@ -59,7 +59,7 @@ require('packer').startup(function()
   use {'junegunn/fzf',  run = function() vim.fn['fzf#install']() end}
   use 'junegunn/fzf.vim'
   use 'antoinemadec/coc-fzf'
-  use 'kristijanhusak/orgmode.nvim'
+  -- use 'kristijanhusak/orgmode.nvim'
   use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
 end)
 
@@ -419,13 +419,6 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
--- Org
--- init.lua
-require('orgmode').setup({
-  org_agenda_files = {'~/Dropbox/TODOS/*'},
-  org_default_notes_file = '~/Dropbox/TODOS/refile.org',
-})
-
 -- Firenvim
 if vim.g.started_by_firenvim then
   vim.o.guifont = "SauceCodePro:h24"
