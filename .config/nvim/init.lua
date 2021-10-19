@@ -168,6 +168,10 @@ vim.api.nvim_set_keymap('x', 'fd', '<Esc>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'ff', ':close<CR>', { noremap = true, silent = true })
 
 -- Window management and navigation
+
+vim.o.winminwidth = 0
+vim.o.winminheight = 0
+
 function current_window()
   return vim.api.nvim_exec(
     [[
@@ -187,11 +191,28 @@ end
 
 
 function close_window(n)
-  if (n > 0) then
+  if (tonumber(n) > 0) then
     vim.cmd(n .. "wincmd c")
   end
 end
 
+function close_current_window_if_small()
+  local n = current_window()
+  local width = tonumber(vim.api.nvim_exec('echo winwidth(' .. n .. ')', true))
+  local height = tonumber(vim.api.nvim_exec('echo winheight(' .. n .. ')', true))
+  if ((width <  21) or (height < 21)) then
+    close_window(n)
+  end
+end
+
+function close_small_windows()
+  -- A bit unsafe as :windo documentation mention that the command in :windo
+  -- should not close windows
+  vim.cmd(
+    [[
+      windo execute "lua close_current_window_if_small()"
+    ]])
+end
 
 vim.api.nvim_set_keymap('n', '<leader>w>', ':lua close_window(next_window())<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>w<', ':lua close_window(previous_window())<CR>', { noremap = true, silent = true })
@@ -202,7 +223,8 @@ vim.api.nvim_set_keymap('n', '<leader>wl', '<C-W>l', { noremap = true, silent = 
 vim.api.nvim_set_keymap('n', '<leader>ww', '<C-W><C-W>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>wo', '<C-W>o', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>wx', '<C-W>x', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>w|', '<C-W>|', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>w|', '<C-W>|:lua close_small_windows()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>w_', '<C-W>_:lua close_small_windows()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>w/', ':vsplit<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>w-', ':split<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>wd', ':hide<CR>', { noremap = true, silent = true })
