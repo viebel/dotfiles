@@ -137,6 +137,10 @@ vim.cmd [[colorscheme onedark]]
 
 --Folding
 vim.o.foldmethod = "expr"
+vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+vim.o.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g')]]
+vim.o.fillchars = "fold: "
+vim.o.foldminlines = 1
 
 --Set statusbar
 vim.g.lightline = {
