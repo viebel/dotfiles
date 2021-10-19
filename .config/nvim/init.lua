@@ -165,9 +165,36 @@ vim.api.nvim_set_keymap('i', 'fd', '<Esc>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'fd', '<Esc>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('x', 'fd', '<Esc>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('x', 'fd', '<Esc>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'ff', ':q<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'ff', ':close<CR>', { noremap = true, silent = true })
 
 -- Window management and navigation
+function current_window()
+  return vim.api.nvim_exec(
+    [[
+    echo winnr()
+    ]]
+    ,
+    true)
+end
+
+function previous_window()
+  return current_window() - 1 
+end
+
+function next_window()
+  return current_window() + 1 
+end
+
+
+function close_window(n)
+  if (n > 0) then
+    vim.cmd(n .. "wincmd c")
+  end
+end
+
+
+vim.api.nvim_set_keymap('n', '<leader>w>', ':lua close_window(next_window())<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>w<', ':lua close_window(previous_window())<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>wj', '<C-W>j', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>wk', '<C-W>k', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>wh', '<C-W>h', { noremap = true, silent = true })
