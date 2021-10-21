@@ -18,6 +18,9 @@ vim.api.nvim_exec(
 local use = require('packer').use
 require('packer').startup(function()
   use 'wbthomason/packer.nvim' -- Package manager
+  use {'Olical/aniseed',  tag = "v3.23.0" }
+  use 'tami5/sqlite.lua'
+  use 'tami5/lispdocs.nvim'
   use 'tpope/vim-fugitive' -- Git commands in nvim
   use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
   use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
