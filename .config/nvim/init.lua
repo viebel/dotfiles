@@ -119,6 +119,10 @@ vim.o.smartcase = true
 vim.o.linebreak = true
 vim.o.relativenumber = true
 
+-- Allow moving the character after the last character of the line
+vim.o.ve = 'onemore'
+vim.api.nvim_set_keymap('n', '$', 'g$', { noremap = true, silent = true })
+
 --Decrease update time
 vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
@@ -242,7 +246,7 @@ vim.api.nvim_set_keymap('v', '<A-k>', ":m '<-2<CR>gv=gv", { noremap = true, sile
 vim.api.nvim_set_keymap('n', '<NL>', 'i<CR><ESC>', { noremap = true, silent = true })
 
 -- Recenter screen
-vim.api.nvim_set_keymap('i', '<C-L>', '<Esc>zzi', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<C-L>', '<Esc>`^zzi', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-L>', 'zz', { noremap = true, silent = true })
 
 -- Quickly open/reload vim
