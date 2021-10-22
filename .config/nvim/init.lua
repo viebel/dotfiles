@@ -172,26 +172,11 @@ vim.api.nvim_set_keymap('n', 'ff', ':close<CR>', { noremap = true, silent = true
 vim.o.winminwidth = 0
 vim.o.winminheight = 0
 
-function current_window()
-  return vim.api.nvim_exec("echo winnr()"
-    ,
-    true)
-end
-
 function num_windows()
   return vim.api.nvim_exec("echo winnr('$')"
     ,
     true)
 end
-
-function previous_window()
-  return current_window() - 1 
-end
-
-function next_window()
-  return current_window() + 1 
-end
-
 
 function close_window(n)
   if (tonumber(n) > 0) then
@@ -202,7 +187,7 @@ end
 function close_window_if_small(n)
   local width = tonumber(vim.api.nvim_exec('echo winwidth(' .. n .. ')', true))
   local height = tonumber(vim.api.nvim_exec('echo winheight(' .. n .. ')', true))
-  if ((width <  21) or (height < 21)) then
+  if ((width <  1) or (height < 1)) then
     close_window(n)
   end
 end
@@ -213,25 +198,30 @@ function close_small_windows()
   end
 end
 
-vim.api.nvim_set_keymap('n', '<leader>w>', ':lua close_window(next_window())<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>w<', ':lua close_window(previous_window())<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>wj', ':wincmd j<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>wk', ':wincmd k<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>wh', ':wincmd h<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>wl', ':wincmd l<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>ww', '<C-W><C-W>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>wo', ':wincmd o<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>wx', ':wincmd x<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>w|', ':wincmd | | lua close_small_windows()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>w_', ':wincmd _ | lua close_small_windows()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>w/', ':vsplit<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>w-', ':split<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>wd', ':hide<CR>', { noremap = true, silent = true })
+function winkey_cmd(k)
+  local basic_cmd = ':wincmd ' .. k 
+  if k == '|' or k == '_' then
+    return basic_cmd .. ' | lua close_small_windows()<CR>'
+  else
+    return basic_cmd .. '<CR>'
+  end
+end
 
-vim.api.nvim_set_keymap('n', '<leader>wJ', ':wincmd J<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>wK', ':wincmd K<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>wH', ':wincmd H<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>wL', ':wincmd L<CR>', { noremap = true, silent = true })
+function set_window_management_keymaps()  
+  local winkeys = {'j', 'k', 'h', 'l', '=', 'w', 'o', 'x', '+', '-', '>', '<', 'J', 'K', 'H', 'L', '|', '_'}
+  for _, winkey in ipairs(winkeys) do
+    vim.api.nvim_set_keymap(
+      'n',
+      '<leader>w' .. winkey, 
+      winkey_cmd(winkey),
+      { noremap = true, silent = true })
+  end
+  vim.api.nvim_set_keymap('n', '<leader>wv', ':vsplit<CR>', { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>ws', ':split<CR>', { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>wd', ':hide<CR>', { noremap = true, silent = true })
+end
+
+set_window_management_keymaps()
 
 -- Move lines up and down
 vim.api.nvim_set_keymap('n', '<A-j>', ':m .+1<CR>==', { noremap = true, silent = true })
