@@ -121,7 +121,6 @@ vim.o.relativenumber = true
 
 -- Allow moving the character after the last character of the line
 vim.o.ve = 'onemore'
-vim.api.nvim_set_keymap('n', '$', 'g$', { noremap = true, silent = true })
 
 --Decrease update time
 vim.o.updatetime = 250
