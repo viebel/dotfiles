@@ -17,7 +17,11 @@ vim.api.nvim_exec(
 
 local use = require('packer').use
 require('packer').startup(function()
-  use 'viebel/halonot'
+  use {'viebel/halonot', 
+    config = function() 
+      require('halonot').setup({main_key = 'w'})
+    end
+  }
   use 'wbthomason/packer.nvim' -- Package manager
   use {'Olical/aniseed',  tag = "v3.23.0" }
   use 'tami5/sqlite.lua'
