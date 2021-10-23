@@ -527,3 +527,5 @@ if vim.g.started_by_firenvim then
   vim.o.laststatus = 0
 end
 
+require('halonot/init')
+
