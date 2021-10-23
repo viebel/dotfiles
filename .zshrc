@@ -121,6 +121,10 @@ export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
 export PATH="$JAVA_HOME/bin:$PATH"
 # }}}
 
+# go {{{
+export PATH=$PATH:/usr/local/go/bin
+# }}}
+
 # clojure {{{
 zinit ice from"gh-r" as"program" pick"clojure-lsp"; zinit light clojure-lsp/clojure-lsp
 zinit ice from"gh-r" as"program" pick"bb"; zinit light babashka/babashka
