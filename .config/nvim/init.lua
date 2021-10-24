@@ -27,6 +27,7 @@ require('packer').startup(function()
   use 'tami5/sqlite.lua'
   use 'tami5/lispdocs.nvim'
   use 'tpope/vim-fugitive' -- Git commands in nvim
+  use 'tpope/vim-abolish'
   use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
   use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
   -- use 'ludovicchabant/vim-gutentags' -- Automatic tags management
