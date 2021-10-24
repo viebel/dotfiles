@@ -144,7 +144,7 @@ vim.o.linebreak = true
 vim.o.relativenumber = true
 
 -- Allow moving the character after the last character of the line
-vim.o.ve = 'onemore'
+vim.o.ve = 'onemore,block'
 
 --Decrease update time
 vim.o.updatetime = 250
