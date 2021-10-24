@@ -477,3 +477,10 @@ if vim.g.started_by_firenvim then
   vim.o.laststatus = 0
 end
 
+-- Commands related to the book
+vim.api.nvim_command [[:iab ijoe *JOE*:]]
+vim.api.nvim_command [[:iab iyou *YOU*:]]
+vim.api.nvim_command [[:iab idave *DAVE*:]]
+vim.api.nvim_command [[:iab inancy *NANCY*:]]
+
+
