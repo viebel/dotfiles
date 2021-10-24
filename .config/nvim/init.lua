@@ -166,12 +166,19 @@ vim.g.gitsigns_status = function ()
   return vim.b.gitsigns_status
 end
 
+vim.g.folder_name = function()
+  return vim.api.nvim_eval('expand("%:h")')
+end
+
 --Set statusbar
 vim.g.lightline = {
   colorscheme = 'onedark',
-  active = { left = { { 'mode', 'paste' }, { 'gitbranch', 'gitstatus', 'readonly', 'filename', 'modified' } } },
+  active = {
+    right = { {'lineinfo', 'percent'}, {'foldername'}},
+    left = { { 'mode', 'paste' }, { 'gitbranch', 'gitstatus', 'readonly', 'filename', 'modified' } } },
   component_function = {
     gitstatus = 'gitsigns_status',
+    foldername = 'folder_name',
     gitbranch = 'fugitive#head' },
 }
 
