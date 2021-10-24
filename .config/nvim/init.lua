@@ -229,9 +229,6 @@ vim.api.nvim_set_keymap('n', '<leader>yd', ':let @"=expand("%:p:h")<CR>', { nore
 -- Completion
 vim.api.nvim_set_keymap('i', '<C-o>', '<C-x><C-o>', { noremap = true, silent = true })
 
--- autosave
-local autosave = require("autosave")
-
 -- NvimTree
 vim.api.nvim_set_keymap('n', '<leader>n', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 
@@ -239,22 +236,22 @@ vim.api.nvim_set_keymap('n', '<leader>n', ':NvimTreeToggle<CR>', { noremap = tru
 vim.api.nvim_command [[nmap <localleader>gn <Plug>(coc-rename)]]
 
 -- Autosave
-autosave.setup(
-    {
-        enabled = true,
-        execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
-        events = {"InsertLeave", "TextChanged"},
-        conditions = {
-            exists = true,
-            filename_is_not = {},
-            filetype_is_not = {},
-            modifiable = true
-        },
-        write_all_buffers = true,
-        on_off_commands = true,
-        clean_command_line_interval = 0,
-        debounce_delay = 135
-    }
+require("autosave").setup(
+  {
+    enabled = true,
+    execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
+    events = {"InsertLeave", "TextChanged"},
+    conditions = {
+      exists = true,
+      filename_is_not = {},
+      filetype_is_not = {},
+      modifiable = true
+    },
+    write_all_buffers = true,
+    on_off_commands = true,
+    clean_command_line_interval = 0,
+    debounce_delay = 135
+  }
 )
 -- Highlight on yank
 vim.api.nvim_exec(
