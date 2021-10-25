@@ -87,57 +87,13 @@ vim.api.nvim_set_keymap('i', '<C-L>', '<Esc>`^zzi', { noremap = true, silent = t
 vim.api.nvim_set_keymap('n', '<C-L>', 'zz', { noremap = true, silent = true })
 
 -- Quickly open/reload vim
-vim.api.nvim_set_keymap('n', '<leader>ev', ':e $MYVIMRC<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>sv', ':source $MYVIMRC<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ev', ':e fnamemodify($MYVIMRC, ":h") . "/../lua/my_config.lua"<CR>', { noremap = true, silent = true })
+vim.cmd(
+  [[
+  noremap <leader>ev :echo fnamemodify($MYVIMRC, ":h") . "/../lua/my_config.lua"<CR>
+  ]])
 
--- yank buffer name
--- relative path (src/foo.txt)
-vim.api.nvim_set_keymap('n', '<leader>yf', ':let @"=expand("%")<CR>', { noremap = true, silent = true })
--- absolute path (/something/src/foo.txt)
-vim.api.nvim_set_keymap('n', '<leader>yF', ':let @"=expand("%:p")<CR>', { noremap = true, silent = true })
--- filename (foo.txt)
-vim.api.nvim_set_keymap('n', '<leader>yb', ':let @"=expand("%:t")<CR>', { noremap = true, silent = true })
--- directory name (/something/src)
-vim.api.nvim_set_keymap('n', '<leader>yd', ':let @"=expand("%:p:h")<CR>', { noremap = true, silent = true })
-
--- Completion
-vim.api.nvim_set_keymap('i', '<C-o>', '<C-x><C-o>', { noremap = true, silent = true })
-
-
--- Search
-vim.api.nvim_set_keymap('n', '<leader>sc', ':noh<CR>', { noremap = true, silent = true })
-
--- Formatting
-vim.api.nvim_set_keymap('n', '<leader>=', "m':% normal ==<CR>`'", { noremap = true, silent = true })
-
---Remap for dealing with word wrap
-vim.api.nvim_set_keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
-vim.api.nvim_set_keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader><tab>', '<C-^>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', 'fd', '<Esc>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'fd', '<Esc>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('x', 'fd', '<Esc>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('x', 'fd', '<Esc>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'ff', ':close<CR>', { noremap = true, silent = true })
-
--- Move lines up and down
-vim.api.nvim_set_keymap('n', '<A-j>', ':m .+1<CR>==', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-k>', ':m .-2<CR>==', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<A-j>', '<Esc>:m .+1<CR>==gi', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<A-k>', '<Esc>:m .-2<CR>==gi', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<A-j>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<A-k>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
-
--- Break a line with <C-J>
-vim.api.nvim_set_keymap('n', '<NL>', 'i<CR><ESC>', { noremap = true, silent = true })
-
--- Recenter screen
-vim.api.nvim_set_keymap('i', '<C-L>', '<Esc>`^zzi', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-L>', 'zz', { noremap = true, silent = true })
-
--- Quickly open/reload vim
-vim.api.nvim_set_keymap('n', '<leader>ev', ':e $MYVIMRC<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>sv', ':source $MYVIMRC<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>sv', ':luafile %<CR>', { noremap = true, silent = true })
 
 -- yank buffer name
 -- relative path (src/foo.txt)
