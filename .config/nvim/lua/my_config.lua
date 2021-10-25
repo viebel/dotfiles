@@ -86,12 +86,24 @@ vim.api.nvim_set_keymap('n', '<NL>', 'i<CR><ESC>', { noremap = true, silent = tr
 vim.api.nvim_set_keymap('i', '<C-L>', '<Esc>`^zzi', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-L>', 'zz', { noremap = true, silent = true })
 
--- Quickly open/reload vim
-vim.api.nvim_set_keymap('n', '<leader>ev', ':e fnamemodify($MYVIMRC, ":h") . "/../lua/my_config.lua"<CR>', { noremap = true, silent = true })
-vim.cmd(
-  [[
-  noremap <leader>ev :echo fnamemodify($MYVIMRC, ":h") . "/../lua/my_config.lua"<CR>
-  ]])
+
+-- Quickly open/reload config files
+function open_plugin_file(filename) 
+  local fullname = vim.api.nvim_eval('fnamemodify($MYVIMRC, ":h")') ..  "/lua/" .. filename
+  vim.cmd(":e " .. fullname)
+end
+
+vim.api.nvim_set_keymap(
+  'n',
+  '<leader>ev',
+  ':lua open_plugin_file(' .. '"my_config.lua"' .. ')<CR>', 
+  { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap(
+  'n',
+  '<leader>ep',
+  ':lua open_plugin_file(' .. '"my_plugins.lua"' .. ')<CR>', 
+  { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<leader>sv', ':luafile %<CR>', { noremap = true, silent = true })
 
