@@ -203,6 +203,9 @@ vim.api.nvim_set_keymap('n', '<leader>gf', [[<cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap('n', '<leader>gs', [[<cmd>lua require('telescope.builtin').git_status()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>gz', [[<cmd>lua require('telescope.builtin').git_stash()<CR>]], { noremap = true, silent = true })
 
+-- Conjure
+vim.api.nvim_set_keymap('n', '<localleader>eR', [[<cmd>ConjureEval (do (in-ns 'dev) (reset))<CR>]], { noremap = true, silent = true })
+
 
 -- Treesitter configuration
 -- Parsers must be installed manually via :TSInstall
