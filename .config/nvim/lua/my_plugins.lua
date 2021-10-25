@@ -140,7 +140,7 @@ vim.api.nvim_command [[nmap <localleader>gn <Plug>(coc-rename)]]
 -- Autosave
 require("autosave").setup(
   {
-    enabled = true,
+    enabled = false,
     execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
     events = {"InsertLeave", "TextChanged"},
     conditions = {
