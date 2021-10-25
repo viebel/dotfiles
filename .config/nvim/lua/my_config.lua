@@ -150,6 +150,7 @@ vim.api.nvim_command [[:iab iyou *YOU*:]]
 vim.api.nvim_command [[:iab idave *DAVE*:]]
 vim.api.nvim_command [[:iab inancy *NANCY*:]]
 
+-- Keymap for executing lua code
 vim.api.nvim_command(
   [[
   vnoremap <leader>ee "zy:lua <C-R>z<CR>
