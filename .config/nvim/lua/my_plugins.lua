@@ -371,6 +371,7 @@ if vim.g.started_by_firenvim then
 end
 
 -- Spelunker
+vim.g.enable_spelunker_vim = 0
 vim.g.spelunker_disable_backquoted_checking = 1
 vim.g.spelunker_disable_uri_checking = 1
 vim.g.spelunker_disable_email_checking = 1
