@@ -34,6 +34,7 @@ require('packer').startup(function()
   -- use 'ludovicchabant/vim-gutentags' -- Automatic tags management
   -- UI to select things (files, grep results, open buffers...)
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+  use { 'nvim-telescope/telescope-github.nvim', requires = { 'nvim-lua/plenary.nvim' } }
   use 'folke/trouble.nvim'
   use 'joshdick/onedark.vim' -- Theme inspired by Atom
   use 'itchyny/lightline.vim' -- Fancier statusline
@@ -160,6 +161,7 @@ require("autosave").setup(
 local actions = require('telescope.actions')
 require('telescope').setup {
   defaults = {
+    path_display = {'smart'},
     mappings = {
       i = {
         ['<C-u>'] = false,
@@ -175,26 +177,30 @@ require('telescope').setup {
   },
 }
 
+require('telescope').load_extension('gh')
+
 -- Buffer management
 vim.api.nvim_set_keymap('n', '<leader>bd', ':bp|bd#<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>bb', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>bB', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>bB', [[<cmd>lua require('telescope.builtin').find_files( { cwd = vim.fn.expand('%:p:h') })<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files( { cwd = require('telescope.utils').buffer_dir() })<CR>]], { noremap = true, silent = true })
 
 -- Clipboard
 vim.api.nvim_set_keymap('n', '<leader>cc', [[<cmd>lua require('telescope').extensions.neoclip.default()<CR>]], { noremap = true, silent = true })
 
 -- Telescope stuff
+
 vim.api.nvim_set_keymap('n', '<leader>rl', [[<cmd>lua require('telescope.builtin').resume()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>pf', [[<cmd>lua require('telescope.builtin').find_files()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files({ cwd = vim.fn.expand('%:p:h') })<CR>]], { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', 'q:', [[<cmd>lua require('telescope.builtin').command_history()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>s/', [[<cmd>lua require('telescope.builtin').search_history()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ss', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>sh', [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>/', [[<cmd>lua require('telescope.builtin').grep_string({search = vim.fn.expand("<cword>")})<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>g/', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>p/', [[<cmd>lua require('telescope.builtin').grep_string({search = vim.fn.input("> "),})<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>g/', [[<cmd>lua require('telescope.builtin').live_grep({})<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>f/', [[<cmd>lua require('telescope.builtin').live_grep({cwd=require('telescope.utils').buffer_dir()})<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>mm', [[<cmd>lua require('telescope.builtin').keymaps()<CR>]], { noremap = true, silent = true })
 
 -- Git
