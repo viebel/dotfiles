@@ -2,6 +2,9 @@
 -- Allow h and l to cross lines
 vim.o.whichwrap = vim.o.whichwrap .. ',l,h'
 
+-- wrap
+vim.o.wrap = true
+
 --Incremental live completion (note: this is now a default on master)
 vim.o.inccommand = 'nosplit'
 
@@ -10,6 +13,9 @@ vim.o.hlsearch = true
 
 --Make line numbers default
 vim.wo.number = true
+
+--always keep a few lines of context around the cursor 
+vim.o.scrolloff = 5
 
 --Do not save when switching buffers (note: this is now a default on master)
 vim.o.hidden = true
@@ -64,6 +70,7 @@ vim.api.nvim_set_keymap('n', '<leader>=', "m':% normal ==<CR>`'", { noremap = tr
 --Remap for dealing with word wrap
 vim.api.nvim_set_keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
 vim.api.nvim_set_keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>tw', ':set wrap!<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader><tab>', '<C-^>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', 'fd', '<Esc>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'fd', '<Esc>', { noremap = true, silent = true })
@@ -81,6 +88,9 @@ vim.api.nvim_set_keymap('v', '<A-k>', ":m '<-2<CR>gv=gv", { noremap = true, sile
 
 -- Break a line with <C-J>
 vim.api.nvim_set_keymap('n', '<NL>', 'i<CR><ESC>', { noremap = true, silent = true })
+
+-- Insert a single character with <C-I>
+vim.api.nvim_set_keymap('n', '<C-I>', 'i <ESC>r', { noremap = true, silent = true })
 
 -- Recenter screen
 vim.api.nvim_set_keymap('i', '<C-L>', '<Esc>`^zzi', { noremap = true, silent = true })
@@ -156,3 +166,13 @@ vim.api.nvim_command(
   vnoremap <leader>ee "zy:lua <C-R>z<CR>
 ]])
 
+
+-- My fun with sexps
+-- -- duplicate a form
+vim.cmd
+[[
+nmap <M-p> yafP`]l<C-j>
+]]
+
+-- Abbrevations to clear some clojure-lsp lint warnings
+vim.cmd [[:iab cljpub #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}]]
