@@ -160,6 +160,8 @@ require("autosave").setup(
 )
 -- Telescope
 local actions = require('telescope.actions')
+local trouble = require("trouble.providers.telescope")
+
 require('telescope').setup {
   defaults = {
     path_display = {'smart'},
@@ -167,6 +169,10 @@ require('telescope').setup {
       i = {
         ['<C-u>'] = false,
         ['<C-d>'] = actions.delete_buffer,
+        ["<c-t>"] = trouble.open_with_trouble,
+      },
+      n = {
+        ["<c-t>"] = trouble.open_with_trouble,
       },
     },
   },
