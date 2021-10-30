@@ -199,6 +199,8 @@ vim.api.nvim_set_keymap('n', '<leader>bd', ':bp|bd#<CR>', { noremap = true, sile
 vim.api.nvim_set_keymap('n', '<leader>bb', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>bB', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files( { cwd = require('telescope.utils').buffer_dir() })<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fe', [[<cmd>lua require('telescope.builtin').file_browser( { cwd = require('telescope.utils').buffer_dir(), hidden = true })<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fE', [[<cmd>lua require('telescope.builtin').file_browser( { hidden = true })<CR>]], { noremap = true, silent = true })
 
 -- Clipboard
 vim.api.nvim_set_keymap('n', '<leader>cc', [[<cmd>lua require('telescope').extensions.neoclip.default()<CR>]], { noremap = true, silent = true })
