@@ -300,7 +300,6 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>gg', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>hh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>gn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>gf', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>gs', [[<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<CR>]], opts)
@@ -397,4 +396,14 @@ vim.g.spelunker_disable_backquoted_checking = 1
 vim.g.spelunker_disable_uri_checking = 1
 vim.g.spelunker_disable_email_checking = 1
 vim.g.spelunker_disable_acronym_checking = 1
+
+-- Trouble
+vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>TroubleToggle<cr>", {silent = true, noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>Trouble lsp_workspace_diagnostics<cr>", {silent = true, noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>Trouble lsp_document_diagnostics<cr>", {silent = true, noremap = true})
+vim.api.nvim_set_keymap("n", "<localleader>gr", "<cmd>Trouble lsp_references<cr>", {silent = true, noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>xn", "<cmd>Trouble<cr><cmd>lua require('trouble').next({skip_groups = true, jump = true})<cr>", {silent = true, noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>xp", "<cmd>Trouble<cr><cmd>lua require('trouble').previous({skip_groups = true, jump = true})<cr>", {silent = true, noremap = true})
+
+
 
