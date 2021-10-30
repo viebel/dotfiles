@@ -86,7 +86,6 @@ require('packer').startup(function()
   use { 'neoclide/coc.nvim', branch= 'release' }
   use {'junegunn/fzf',  run = function() vim.fn['fzf#install']() end}
   use 'junegunn/fzf.vim'
-  use 'pelodelfuego/vim-swoop'
   use 'antoinemadec/coc-fzf'
   -- use 'kristijanhusak/orgmode.nvim'
   use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
