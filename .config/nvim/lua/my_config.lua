@@ -130,9 +130,6 @@ vim.api.nvim_set_keymap('n', '<leader>yb', ':let @"=expand("%:t")<CR>', { norema
 -- directory name (/something/src)
 vim.api.nvim_set_keymap('n', '<leader>yd', ':let @"=expand("%:p:h")<CR>', { noremap = true, silent = true })
 
--- Completion
-vim.api.nvim_set_keymap('i', '<C-o>', '<C-x><C-o>', { noremap = true, silent = true })
-
 -- Highlight on yank
 vim.api.nvim_exec(
   [[
