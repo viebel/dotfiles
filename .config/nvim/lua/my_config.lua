@@ -174,5 +174,3 @@ vim.cmd
 nmap <M-p> yafP`]l<C-j>
 ]]
 
--- Abbrevations to clear some clojure-lsp lint warnings
-vim.cmd [[:iab cljpub #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}]]
