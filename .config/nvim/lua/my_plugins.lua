@@ -23,7 +23,6 @@ require('packer').startup(function()
     end
   }
   use 'wbthomason/packer.nvim' -- Package manager
-  use {'kamykn/spelunker.vim', requires = { 'kamykn/popup-menu.nvim' }}
   use {'Olical/aniseed',  tag = "v3.23.0" }
   use 'tami5/sqlite.lua'
   use 'tami5/lispdocs.nvim'
@@ -389,13 +388,6 @@ if vim.g.started_by_firenvim then
   vim.o.guifont = "SauceCodePro:h24"
   vim.o.laststatus = 0
 end
-
--- Spelunker
-vim.g.enable_spelunker_vim = 0
-vim.g.spelunker_disable_backquoted_checking = 1
-vim.g.spelunker_disable_uri_checking = 1
-vim.g.spelunker_disable_email_checking = 1
-vim.g.spelunker_disable_acronym_checking = 1
 
 -- Trouble
 vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>TroubleToggle<cr>", {silent = true, noremap = true})
