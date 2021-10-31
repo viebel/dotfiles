@@ -177,6 +177,7 @@ vim.cmd
 nmap <M-p> yafP`]l<C-j>
 ]]
 
+-- Set path to buffer current folder
 function set_my_path()
   local current_buffer_full_path = vim.fn.expand("%:p:h")
   vim.o.path = current_buffer_full_path
@@ -188,3 +189,24 @@ augroup MyAutoComamnds
   autocmd BufEnter * lua set_my_path()
 augroup end
 ]]
+
+local function my_pwd()
+  return vim.api.nvim_exec("pwd", true)
+end
+
+function my_save_session()
+  vim.cmd('mksession! session.vim')
+  local a = my_pwd()
+  print("Session saved to: " .. a .. "/session.vim")
+end
+
+function my_restore_session()
+  vim.cmd('source session.vim')
+  local a = my_pwd()
+  print("Session restored from: " .. a .. "/session.vim")
+end
+
+-- Session management
+vim.api.nvim_set_keymap('n', '<leader>as', '<cmd>lua my_save_session()<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ar', '<cmd>lua my_restore_session()<cr>', { noremap = true, silent = true })
+
