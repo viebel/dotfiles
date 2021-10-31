@@ -174,3 +174,14 @@ vim.cmd
 nmap <M-p> yafP`]l<C-j>
 ]]
 
+function set_my_path()
+  local current_buffer_full_path = vim.fn.expand("%:p:h")
+  vim.o.path = current_buffer_full_path
+end
+
+vim.cmd
+[[
+augroup MyAutoComamnds
+  autocmd BufEnter * lua set_my_path()
+augroup end
+]]
