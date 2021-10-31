@@ -14,6 +14,9 @@ vim.o.inccommand = 'nosplit'
 --Set highlight on search
 vim.o.hlsearch = true
 
+-- No swap files
+vim.o.swapfile = false
+
 --Make line numbers default
 vim.wo.number = true
 
