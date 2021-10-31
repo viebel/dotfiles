@@ -2,6 +2,9 @@
 -- Allow h and l to cross lines
 vim.o.whichwrap = vim.o.whichwrap .. ',l,h'
 
+-- Spell check
+vim.o.spell = true
+
 -- wrap
 vim.o.wrap = true
 
