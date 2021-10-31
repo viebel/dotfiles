@@ -209,8 +209,6 @@ vim.api.nvim_set_keymap('n', '<leader>cc', [[<cmd>lua require('telescope').exten
 
 vim.api.nvim_set_keymap('n', '<leader>rl', [[<cmd>lua require('telescope.builtin').resume()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>pf', [[<cmd>lua require('telescope.builtin').find_files()<CR>]], { noremap = true, silent = true })
-
-vim.api.nvim_set_keymap('n', 'q:', [[<cmd>lua require('telescope.builtin').command_history()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>s/', [[<cmd>lua require('telescope.builtin').search_history()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ss', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>sh', [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], { noremap = true, silent = true })
