@@ -22,6 +22,7 @@ require('packer').startup(function()
       require('halonot').setup({main_key = 'w'})
     end
   }
+  use 'mbbill/undotree'
   use 'VincentCordobes/vim-translate'
   use 'wbthomason/packer.nvim' -- Package manager
   use {'Olical/aniseed',  tag = "v3.23.0" }
