@@ -4,6 +4,9 @@ vim.o.whichwrap = vim.o.whichwrap .. ',l,h'
 
 -- Spell check
 vim.o.spell = true
+-- No spell check for words wrapped by backticks
+vim.cmd[[syn match myExCapitalWords +`.*`+ contains=@NoSpell]]
+vim.api.nvim_set_keymap('n', '<leader>zt', ':set spell!<CR>', { noremap = true, silent = true })
 
 -- wrap
 vim.o.wrap = true
@@ -184,7 +187,7 @@ function set_my_path()
 end
 
 vim.cmd
-[[
+[[                        
 augroup MyAutoComamnds
   autocmd BufEnter * lua set_my_path()
 augroup end
