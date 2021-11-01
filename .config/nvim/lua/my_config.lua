@@ -87,6 +87,9 @@ vim.o.foldminlines = 1
 -- Search
 vim.api.nvim_set_keymap('n', '<leader>sc', ':noh<CR>', { noremap = true, silent = true })
 
+-- Select all
+vim.api.nvim_set_keymap('n', '<leader>aa', "VGogg", { noremap = true, silent = true })
+
 -- Formatting
 vim.api.nvim_set_keymap('n', '<leader>=', "m':% normal ==<CR>`'", { noremap = true, silent = true })
 
