@@ -112,8 +112,8 @@ vim.api.nvim_set_keymap('v', '<A-k>', ":m '<-2<CR>gv=gv", { noremap = true, sile
 -- Break a line with <C-J>
 vim.api.nvim_set_keymap('n', '<NL>', 'i<CR><ESC>', { noremap = true, silent = true })
 
--- Insert a single character with <C-I>
-vim.api.nvim_set_keymap('n', '<C-I>', 'i <ESC>r', { noremap = true, silent = true })
+-- Insert a single character
+vim.api.nvim_set_keymap('n', '<leader>ii', 'i <ESC>r', { noremap = true, silent = true })
 
 -- Recenter screen
 vim.api.nvim_set_keymap('i', '<C-L>', '<Esc>`^zzi', { noremap = true, silent = true })
