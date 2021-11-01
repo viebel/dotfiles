@@ -3,10 +3,24 @@
 vim.o.whichwrap = vim.o.whichwrap .. ',l,h'
 
 -- Spell check
-vim.o.spell = true
--- No spell check for words wrapped by backticks
-vim.cmd[[syn match myExCapitalWords +`.*`+ contains=@NoSpell]]
+vim.o.spell = false
+
+
+vim.cmd[[
+autocmd FileType asciidoc set spell
+]]
+
+function my_ignore_spell() 
+  vim.cmd[[
+  syn match myWordsToIgnore +`.*`+ contains=@NoSpell
+  syn match myWordsToIgnore +:.*:+ contains=@NoSpell
+  syn match myWordsToIgnore +\..*\[+ contains=@NoSpell
+  syn match myWordsToIgnore /\<[A-Za-z]\+[A-Z].\{-}\>/ contains=@NoSpell
+  ]]
+end
+
 vim.api.nvim_set_keymap('n', '<leader>zt', ':set spell!<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>zi', ':lua my_ignore_spell()<CR>', { noremap = true, silent = true })
 
 -- wrap
 vim.o.wrap = true
