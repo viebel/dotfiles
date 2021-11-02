@@ -190,13 +190,6 @@ vim.api.nvim_command(
 ]])
 
 
--- My fun with sexps
--- -- duplicate a form
-vim.cmd
-[[
-nmap <M-p> yafP`]l<C-j>
-]]
-
 -- Set path to buffer current folder
 function set_my_path()
   local current_buffer_full_path = vim.fn.expand("%:p:h")
