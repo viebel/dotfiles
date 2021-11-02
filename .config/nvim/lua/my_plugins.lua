@@ -22,6 +22,9 @@ require('packer').startup(function()
       require('halonot').setup({main_key = 'w'})
     end
   }
+  use {
+    "ray-x/lsp_signature.nvim",
+  }
   use 'mbbill/undotree'
   use 'VincentCordobes/vim-translate'
   use 'wbthomason/packer.nvim' -- Package manager
@@ -400,4 +403,6 @@ vim.api.nvim_set_keymap("n", "<leader>xn", "<cmd>Trouble<cr><cmd>lua require('tr
 vim.api.nvim_set_keymap("n", "<leader>xp", "<cmd>Trouble<cr><cmd>lua require('trouble').previous({skip_groups = true, jump = true})<cr>", {silent = true, noremap = true})
 
 
+-- LSP Signature
+require "lsp_signature".setup()
 
