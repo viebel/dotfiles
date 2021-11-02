@@ -101,7 +101,8 @@ vim.api.nvim_set_keymap('n', '<leader><tab>', '<C-^>', { noremap = true, silent 
 vim.api.nvim_set_keymap('i', 'fd', '<Esc>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'fd', '<Esc>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('x', 'fd', '<Esc>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('x', 'fd', '<Esc>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('c', 'fd', '<c-c>', { noremap = true, silent = false })
+vim.api.nvim_set_keymap('o', 'fd', '<Esc>', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('n', 'ff', ':close<CR>', { noremap = true, silent = true })
 
 -- Move lines up and down
