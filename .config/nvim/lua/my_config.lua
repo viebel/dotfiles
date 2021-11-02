@@ -7,7 +7,7 @@ vim.o.spell = false
 
 
 vim.cmd[[
-autocmd FileType asciidoc set spell
+autocmd FileType asciidoc setlocal spell
 ]]
 
 function my_ignore_spell() 
