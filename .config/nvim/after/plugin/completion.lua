@@ -3,30 +3,18 @@ vim.opt.completeopt = { "menu", "menuone", "noselect" }
 -- Don't show the dumb matching stuff.
 vim.opt.shortmess:append "c"
 
--- Complextras.nvim configuration
-vim.api.nvim_set_keymap(
-  "i",
-  "<C-x><C-m>",
-  [[<c-r>=luaeval("require('complextras').complete_matching_line()")<CR>]],
-  { noremap = true }
-)
-
-vim.api.nvim_set_keymap(
-  "i",
-  "<C-x><C-d>",
-  [[<c-r>=luaeval("require('complextras').complete_line_from_cwd()")<CR>]],
-  { noremap = true }
-)
-
 local lspkind = require "lspkind"
 lspkind.init()
 
 local cmp = require "cmp"
 
 cmp.setup {
+  completion = {
+    completeopt = 'menu,menuone,noinsert',
+  },
   mapping = {
-    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-d>"] = cmp.mapping.scroll_docs(4),
     ["<C-e>"] = cmp.mapping.close(),
     ["<c-y>"] = cmp.mapping(
       cmp.mapping.confirm {
@@ -142,38 +130,22 @@ cmp.setup {
         nvim_lua = "[api]",
         path = "[path]",
         ultisnips = "[snip]",
-        gh_issues = "[issues]",
-        tn = "[TabNine]",
       },
     },
   },
-
   experimental = {
     native_menu = false,
     ghost_text = false,
   },
 }
 
-cmp.setup.cmdline("/", {
-  completion = {
-    -- Might allow this later, but I don't like it right now really.
-    -- Although, perhaps if it just triggers w/ @ then we could.
-    --
-    -- I will have to come back to this.
-    autocomplete = false,
-  },
-  sources = cmp.config.sources({
-    { name = "nvim_lsp_document_symbol" },
-  }, {
-    -- { name = "buffer", keyword_length = 5 },
-  }),
+cmp.setup.cmdline('/', {
+    sources = {
+      { name = 'buffer', keyword_length = 3 }
+  }
 })
 
 cmp.setup.cmdline(":", {
-  completion = {
-    autocomplete = false,
-  },
-
   sources = cmp.config.sources({
     {
       name = "path",
@@ -181,8 +153,8 @@ cmp.setup.cmdline(":", {
   }, {
     {
       name = "cmdline",
-      max_item_count = 20,
-      keyword_length = 4,
+      max_item_count = 10,
+      keyword_length = 3,
     },
   }),
 })
