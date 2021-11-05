@@ -1,5 +1,3 @@
-local is_wsl = vim.env.USER == "tj-wsl"
-
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 -- Don't show the dumb matching stuff.
@@ -92,14 +90,9 @@ cmp.setup {
   --        max_item_count
   --        (more?)
   sources = {
-    { name = "gh_issues" },
-    -- { name = "tn" },
-
-    -- Youtube: Could enable this only for lua, but nvim_lua handles that already.
     { name = "ultisnips" },
     { name = "nvim_lua" },
     { name = "zsh" },
-
     { name = "nvim_lsp" },
     { name = "path" },
     { name = "buffer", keyword_length = 5 },
@@ -156,11 +149,8 @@ cmp.setup {
   },
 
   experimental = {
-    -- I like the new menu better! Nice work hrsh7th
     native_menu = false,
-
-    -- Let's play with this for a day or two
-    ghost_text = not is_wsl,
+    ghost_text = false,
   },
 }
 
