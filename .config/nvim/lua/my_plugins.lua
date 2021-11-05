@@ -25,6 +25,8 @@ require('packer').startup(function()
   use {
     "ray-x/lsp_signature.nvim",
   }
+  use 'kamykn/spelunker.vim'
+  use 'kamykn/popup-menu.nvim'
   use 'mbbill/undotree'
   use 'VincentCordobes/vim-translate'
   use 'wbthomason/packer.nvim' -- Package manager
@@ -367,3 +369,5 @@ vim.api.nvim_set_keymap("n", "<leader>xp", "<cmd>Trouble<cr><cmd>lua require('tr
 -- LSP Signature
 require "lsp_signature".setup()
 
+-- Spelunker
+vim.g.enable_spelunker_vim = 0
