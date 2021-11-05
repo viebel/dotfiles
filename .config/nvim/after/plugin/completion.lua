@@ -1,4 +1,4 @@
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
+-- vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 -- Don't show the dumb matching stuff.
 vim.opt.shortmess:append "c"
@@ -23,52 +23,6 @@ cmp.setup {
       },
       { "i", "c" }
     ),
-
-    ["<c-space>"] = cmp.mapping {
-      i = cmp.mapping.complete(),
-      c = function(
-        _ --[[fallback]]
-      )
-        if cmp.visible() then
-          if not cmp.confirm { select = true } then
-            return
-          end
-        else
-          cmp.complete()
-        end
-      end,
-    },
-
-    ["<tab>"] = cmp.mapping {
-      i = cmp.config.disable,
-      c = function(fallback)
-        fallback()
-      end,
-    },
-
-    -- Testing
-    ["<c-q>"] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-
-    -- If you want tab completion :'(
-    --  First you have to just promise to read `:help ins-completion`.
-    --
-    -- ["<Tab>"] = function(fallback)
-    --   if cmp.visible() then
-    --     cmp.select_next_item()
-    --   else
-    --     fallback()
-    --   end
-    -- end,
-    -- ["<S-Tab>"] = function(fallback)
-    --   if cmp.visible() then
-    --     cmp.select_prev_item()
-    --   else
-    --     fallback()
-    --   end
-    -- end,
   },
 
   --    the order of your sources matter (by default). That gives them priority
@@ -82,7 +36,7 @@ cmp.setup {
     { name = "nvim_lua" },
     { name = "zsh" },
     { name = "nvim_lsp" },
-    { name = "path" },
+    { name = "path", keyword_length = 3 },
     { name = "buffer", keyword_length = 5 },
   },
 
