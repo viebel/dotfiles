@@ -2,6 +2,7 @@
     "diagnostic.checkCurrentLine": true,
     "diagnostic.enableMessage": "jump",
     "diagnostic.enableHighlightLineNumber": false,
+    "suggest.autoTrigger": false,
 
     "languageserver": {
         "dls": {
@@ -21,6 +22,6 @@
                 "semantic-tokens?": false
             }
         }
-    }
+    },
 }
 
