@@ -5,11 +5,6 @@ vim.o.whichwrap = vim.o.whichwrap .. ',l,h'
 -- Spell check
 vim.o.spell = false
 
-
-vim.cmd[[
-autocmd FileType asciidoc setlocal spell
-]]
-
 function my_ignore_spell() 
   vim.cmd[[
   syn match myWordsToIgnore +`.*`+ contains=@NoSpell
