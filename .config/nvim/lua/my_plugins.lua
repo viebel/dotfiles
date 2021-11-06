@@ -22,9 +22,7 @@ require('packer').startup(function()
       require('halonot').setup({main_key = 'w'})
     end
   }
-  use {
-    "ray-x/lsp_signature.nvim",
-  }
+  use 'ray-x/lsp_signature.nvim'
   use 'kamykn/spelunker.vim'
   use 'kamykn/popup-menu.nvim'
   use 'mbbill/undotree'
