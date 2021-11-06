@@ -66,8 +66,6 @@ require('packer').startup(function()
   }
   -- Highlight, edit, and navigate code using a fast incremental parsing library
   use 'nvim-treesitter/nvim-treesitter'
-  -- Additional textobjects for treesitter
-  use 'nvim-treesitter/nvim-treesitter-textobjects'
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
   use 'onsails/lspkind-nvim'
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
@@ -258,35 +256,7 @@ require('nvim-treesitter.configs').setup {
 	  extended_mode = false,
 	  max_file_lines = 4000
   },
-  textobjects = {
-    select = {
-      enable = true,
-      lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-      keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ['af'] = '@function.outer',
-        ['if'] = '@function.inner',
-      },
-    },
-    move = {
-      enable = true,
-      set_jumps = true, -- whether to set jumps in the jumplist
-      goto_next_start = {
-        [']m'] = '@function.outer',
-      },
-      goto_next_end = {
-        [']M'] = '@function.outer',
-      },
-      goto_previous_start = {
-        ['[m'] = '@function.outer',
-      },
-      goto_previous_end = {
-        ['[M'] = '@function.outer',
-      },
-    },
-  },
 }
-
 
 -- LSP settings
 local nvim_lsp = require 'lspconfig'
