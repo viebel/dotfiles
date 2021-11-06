@@ -90,7 +90,6 @@ require('packer').startup(function()
   use 'sheerun/vim-polyglot'
   use { 'neoclide/coc.nvim', branch= 'release' }
   use {'junegunn/fzf',  run = function() vim.fn['fzf#install']() end}
-  use 'junegunn/fzf.vim'
   use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
   use { "AckslD/nvim-neoclip.lua",
     requires = {'tami5/sqlite.lua', module = 'sqlite'},
@@ -111,6 +110,7 @@ require('packer').startup(function()
     } end
   }
 end)
+
 vim.g.gitsigns_status = function ()
   return vim.b.gitsigns_status
 end
