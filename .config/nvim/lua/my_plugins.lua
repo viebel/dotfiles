@@ -73,8 +73,6 @@ require('packer').startup(function()
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
-  use 'L3MON4D3/LuaSnip' -- Snippets plugin
-  use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
   use 'quangnguyen30192/cmp-nvim-ultisnips'
   use 'SirVer/ultisnips'
   use 'guns/vim-sexp'
@@ -306,9 +304,6 @@ if not vim.lsp_loaded then
 	end
 	vim.lsp_loaded = true
 end
-
--- luasnip setup
-local luasnip = require 'luasnip'
 
 -- Firenvim
 if vim.g.started_by_firenvim then
