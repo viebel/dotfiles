@@ -83,7 +83,6 @@ require('packer').startup(function()
   use 'p00f/nvim-ts-rainbow'
   use 'sheerun/vim-polyglot'
   use { 'neoclide/coc.nvim', branch= 'release' }
-  use {'junegunn/fzf',  run = function() vim.fn['fzf#install']() end}
   use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
   use { "AckslD/nvim-neoclip.lua",
     requires = {'tami5/sqlite.lua', module = 'sqlite'},
@@ -187,19 +186,18 @@ require('telescope').setup {
       fuzzy = true,                    -- false will only do exact matching
       override_generic_sorter = true,  -- override the generic sorter
       override_file_sorter = true,     -- override the file sorter
-      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-                                       -- the default case_mode is "smart_case"
     }
   },
   pickers = {
     buffers = {
-      ignore_current_buffer = true,
+      ignore_current_buffer = false,
       sort_lastused = true,
     },
   },
 }
 
 require('telescope').load_extension('gh')
+require('telescope').load_extension('fzf')
 
 -- Buffer management
 vim.api.nvim_set_keymap('n', '<leader>bd', ':bp|bd#<CR>', { noremap = true, silent = true })
