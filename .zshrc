@@ -243,3 +243,8 @@ if [ -f '/home/viebel/google-cloud-sdk/path.zsh.inc' ]; then . '/home/viebel/goo
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/viebel/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/viebel/google-cloud-sdk/completion.zsh.inc'; fi
+
+# zoxide https://github.com/ajeetdsouza/zoxide
+unalias zi
+eval "$(zoxide init zsh)"
+
