@@ -1,3 +1,4 @@
+-- Taken from https://github.com/tjdevries/config_manager/blob/master/xdg_config/nvim/after/plugin/completion.lua
 -- vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 -- Don't show the dumb matching stuff.
@@ -23,6 +24,12 @@ cmp.setup {
       },
       { "i", "c" }
     ),
+    ["<tab>"] = cmp.mapping {
+      i = cmp.config.disable,
+      c = function(fallback)
+        fallback()
+      end,
+    },
   },
 
   --    the order of your sources matter (by default). That gives them priority
