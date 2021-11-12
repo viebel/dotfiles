@@ -12,3 +12,4 @@ Things to install manually:
 - SauceCode fonts
 - subversion
 - starship
+- cmake
