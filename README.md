@@ -2,14 +2,12 @@
 
 Things to install manually:
 
-- neovim
-- tmux
-- zsh
 - zinit
 - zoxide
 - fzf
-- rigrep
 - SauceCode fonts
-- subversion
 - starship
-- cmake
+
+```bash
+sudo apt install -y cmake g++ subversion fzf ripgrep zsh tmux neovim
+```
