@@ -11,3 +11,4 @@ Things to install manually:
 - rigrep
 - SauceCode fonts
 - subversion
+- starship
