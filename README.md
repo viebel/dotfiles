@@ -10,3 +10,4 @@ Things to install manually:
 - fzf
 - rigrep
 - SauceCode fonts
+- subversion
