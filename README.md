@@ -2,6 +2,9 @@
 
 Things to install manually:
 
+- linuxbrew
+- latest nodejs
+- python3
 - zinit
 - zoxide
 - fzf
