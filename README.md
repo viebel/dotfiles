@@ -1,4 +1,7 @@
 # dotfiles
+```bash
+apt-add-repository http://archive.ubuntu.com/ubuntu/
+```
 
 ```bash
 sudo apt-get install build-essential
