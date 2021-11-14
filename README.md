@@ -9,7 +9,7 @@ Things to install manually:
 - linuxbrew
 - latest nodejs
 - python3
-- zinit
+- zinit (manual install)
 - zoxide
 - fzf
 - SauceCode fonts
