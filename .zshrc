@@ -116,6 +116,7 @@ autoload -Uz colors && colors
 autoload -Uz promptinit && promptinit
 # }}}
 
+export PATH=$PATH:~/.local/bin
 # java {{{
 export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
 export PATH="$JAVA_HOME/bin:$PATH"
