@@ -1,5 +1,9 @@
 # dotfiles
 
+```bash
+sudo apt-get install build-essential
+```
+
 Things to install manually:
 
 - linuxbrew
