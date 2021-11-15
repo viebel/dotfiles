@@ -1,6 +1,6 @@
 local is_wsl = (function()
   local output = vim.fn.systemlist "uname -r"
-  return not not string.find(output[1] or "", "WSL")
+  return not not string.find(output[1] or "", "Microsoft")
 end)()
 
 if is_wsl then

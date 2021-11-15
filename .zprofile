@@ -12,7 +12,7 @@ if [[ -z "$LANG" ]]; then export LANG='en_US.UTF-8'; fi
 typeset -gU cdpath fpath mailpath path
 
 # set the list of directories that zsh searches for programs.
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+eval $(~/.linuxbrew/bin/brew shellenv)
 path=(/usr/local/{bin,sbin} $path)
 
 # set the default less options.

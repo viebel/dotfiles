@@ -251,3 +251,8 @@ if [ -f '/home/viebel/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/vieb
 unalias zi
 eval "$(zoxide init zsh)"
 
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+export PATH="/home/viebel/.linuxbrew/bin:$PATH"
