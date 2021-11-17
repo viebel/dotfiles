@@ -1,3 +1,4 @@
+
 # credits https://pastebin.com/Tgji4PZv
 
 # zinit {{{
@@ -156,9 +157,12 @@ if [ -f ~/.cyco_aliases ]; then
     . ~/.cyco_aliases
 fi
 
-alias c="cd"
+alias c="z"
 alias c-="c -"
 alias cd..="cd .."
+alias c..="cd .."
+
+alias apti="sudo apt install"
 
 alias cat="batcat"
 
