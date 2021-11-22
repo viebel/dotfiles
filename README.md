@@ -1,4 +1,7 @@
 # dotfiles
+```bash
+apt-add-repository http://archive.ubuntu.com/ubuntu/
+```
 
 ```bash
 sudo apt-get install build-essential
@@ -9,7 +12,7 @@ Things to install manually:
 - linuxbrew
 - latest nodejs
 - python3
-- zinit
+- zinit (manual install)
 - zoxide
 - fzf
 - SauceCode fonts
