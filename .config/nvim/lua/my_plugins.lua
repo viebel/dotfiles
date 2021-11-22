@@ -233,7 +233,6 @@ vim.api.nvim_set_keymap('n', '<leader>gz', [[<cmd>lua require('telescope.builtin
 -- Conjure
 vim.api.nvim_set_keymap('n', '<localleader>eR', [[<cmd>ConjureEval (do (in-ns 'dev) (reset))<CR>]], { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<localleader>eT', [[<cmd>ConjureEval (do (clojure.test/run-tests))<CR>]], { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<localleader>eU', [[<cmd>ConjureEval (do (clojure.core/println "Removing aliases and mappings of" (clojure.core/ns-name clojure.core/*ns*)) (clojure.core/doseq [[s] (clojure.core/ns-refers (clojure.core/ns-name clojure.core/*ns*))] (clojure.core/ns-unmap (clojure.core/ns-name clojure.core/*ns*) s)) (clojure.core/doseq [[s] (clojure.core/ns-aliases (clojure.core/ns-name clojure.core/*ns*))] (clojure.core/ns-unalias (clojure.core/ns-name clojure.core/*ns*) s)))<CR>]], { noremap = true, silent = true })
 
