@@ -17,3 +17,5 @@ detect_variables = []
 [java]
 symbol = " "
 format = "via [${symbol}]($style)"
+[git_status]
+up_to_date = "✓"
