@@ -21,3 +21,6 @@ Things to install manually:
 ```bash
 sudo apt install -y cmake g++ subversion fzf ripgrep zsh tmux neovim
 ```
+
+Things to configure manually:
+- tmux plugins https://github.com/tmux-plugins/tpm
