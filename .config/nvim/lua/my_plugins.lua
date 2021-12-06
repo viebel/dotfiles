@@ -34,7 +34,10 @@ require('packer').startup(function()
   use 'tpope/vim-fugitive' -- Git commands in nvim
   use 'tpope/vim-abolish'
   use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
-  use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
+  use {'numToStr/Comment.nvim', config = function()
+    require('Comment').setup()
+  end
+  }
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
   use { 'nvim-telescope/telescope-github.nvim', requires = { 'nvim-lua/plenary.nvim' } }
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
