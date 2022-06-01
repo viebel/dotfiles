@@ -8,29 +8,29 @@ autoload -Uz _zinit
 # }}}
 
 # prezto {{{
-zstyle ':prezto:*:*' case-sensitive 'no'
-zstyle ':prezto:*:*' color 'yes'
-zinit ice svn; zinit snippet PZT::modules/helper
-zinit ice svn; zinit snippet PZT::modules/environment
-zinit ice svn; zinit snippet PZT::modules/terminal
-zinit ice svn; zinit snippet PZT::modules/editor
-zinit ice svn silent; zinit snippet PZT::modules/gpg
-zinit ice svn silent pick"init.zsh" lucid; zinit snippet PZT::modules/utility
+# zstyle ':prezto:*:*' case-sensitive 'no'
+# zstyle ':prezto:*:*' color 'yes'
+# zinit ice svn; zinit snippet PZT::modules/helper
+# zinit ice svn; zinit snippet PZT::modules/environment
+# zinit ice svn; zinit snippet PZT::modules/terminal
+# zinit ice svn; zinit snippet PZT::modules/editor
+# zinit ice svn silent; zinit snippet PZT::modules/gpg
+# zinit ice svn silent pick"init.zsh" lucid; zinit snippet PZT::modules/utility
 # }}}
 
 # colors {{{
-export BASE16_THEME='eighties'
-zinit light 'chrissicool/zsh-256color'
-zinit ice pick"scripts/base16-${BASE16_THEME}.sh"; zinit light fnune/base16-shell
-zinit ice lucid wait'0' src"bash/base16-${BASE16_THEME}.config" pick"bash/base16-${BASE16_THEME}.config" nocompile'!'; zinit light fnune/base16-fzf
+# export BASE16_THEME='eighties'
+# zinit light 'chrissicool/zsh-256color'
+# zinit ice pick"scripts/base16-${BASE16_THEME}.sh"; zinit light fnune/base16-shell
+# zinit ice lucid wait'0' src"bash/base16-${BASE16_THEME}.config" pick"bash/base16-${BASE16_THEME}.config" nocompile'!'; zinit light fnune/base16-fzf
 # }}}
 
 # misc plugins {{{
-zinit ice from"gh-r" as"program" bpick"*x86_64-unknown-linux-gnu*" pick"fd-*/fd"; zinit light sharkdp/fd
-zinit ice pick"bd.zsh"; zinit light Tarrasch/zsh-bd
-zinit light djui/alias-tips
-zinit ice from"gh-r" as"program" bpick"*x86_64-unknown-linux-gnu*" pick"lsd-*/lsd"; zinit light Peltoche/lsd
-zinit ice from"gh-r" as"program" pick"diff-so-fancy"; zinit light so-fancy/diff-so-fancy
+# zinit ice from"gh-r" as"program" bpick"*x86_64-unknown-linux-gnu*" pick"fd-*/fd"; zinit light sharkdp/fd
+# zinit ice pick"bd.zsh"; zinit light Tarrasch/zsh-bd
+# zinit light djui/alias-tips
+# zinit ice from"gh-r" as"program" bpick"*x86_64-unknown-linux-gnu*" pick"lsd-*/lsd"; zinit light Peltoche/lsd
+# zinit ice from"gh-r" as"program" pick"diff-so-fancy"; zinit light so-fancy/diff-so-fancy
 # }}}
 
 # prompt {{{
@@ -38,9 +38,9 @@ eval "$(starship init zsh)"
 # }}}
 
 # tmux {{
-zstyle ':prezto:module:tmux:session' name '0'
+# zstyle ':prezto:module:tmux:session' name '0'
 # [[ -n $DISPLAY ]] && zstyle ':prezto:module:tmux:auto-start' local 'yes'
-zinit ice svn; zinit snippet PZT::modules/tmux
+# zinit ice svn; zinit snippet PZT::modules/tmux
 # }}}
 
 # fzf {{{
@@ -53,7 +53,7 @@ export ENHANCD_FILTER=fzf-tmux
 export ENHANCD_DISABLE_DOT=1
 export ENHANCD_DISABLE_HYPHEN=1
 export ENHANCD_DISABLE_HOME=1
-zinit ice pick"init.sh"; zinit light b4b4r07/enhancd
+# zinit ice pick"init.sh"; zinit light b4b4r07/enhancd
 # }}}
 
 # completion {{{
@@ -72,7 +72,7 @@ setopt PATH_DIRS
 # }}}
 
 # suggestions {{{
-zinit ice wait atload"_zsh_autosuggest_start" lucid; zinit light zsh-users/zsh-autosuggestions
+# zinit ice wait atload"_zsh_autosuggest_start" lucid; zinit light zsh-users/zsh-autosuggestions
 # }}}
 
 # history {{{
@@ -84,13 +84,13 @@ zstyle ":plugin:history-search-multi-word" active "standout"
 
 # syntax highlighting {{{
 # NOTE must be last plugin to load
-zinit ice wait lucid atinit"zpcompinit; zpcdreplay"; zinit light zdharma-mirror/fast-syntax-highlighting
+# zinit ice wait lucid atinit"zpcompinit; zpcdreplay"; zinit light zdharma-mirror/fast-syntax-highlighting
 # }}}
 
 # load everything {{{
-autoload -Uz compinit
-compinit
-zinit cdreplay -q
+# autoload -Uz compinit
+# compinit
+# zinit cdreplay -q
 # }}}
 
 # disable C-s stopping receiving keyboard signals.
@@ -112,9 +112,9 @@ bindkey '^h' backward-delete-char
 # }}}
 
 # terminal {{{
-setopt PROMPT_SUBST
-autoload -Uz colors && colors
-autoload -Uz promptinit && promptinit
+# setopt PROMPT_SUBST
+# autoload -Uz colors && colors
+# autoload -Uz promptinit && promptinit
 # }}}
 
 export PATH=$PATH:~/.local/bin
@@ -122,6 +122,9 @@ export PATH=$PATH:~/.local/bin
 export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
 export PATH="$JAVA_HOME/bin:$PATH"
 # }}}
+#
+
+
 
 # go {{{
 export PATH=$PATH:/usr/local/go/bin
@@ -130,12 +133,14 @@ export PATH=$PATH:/usr/local/go/bin
 # clojure {{{
 zinit ice from"gh-r" as"program" pick"clojure-lsp"; zinit light clojure-lsp/clojure-lsp
 zinit ice from"gh-r" as"program" pick"bb"; zinit light babashka/babashka
+export PATH=$PATH:/Applications/clojure
 # }}}
 
 # python {{{
 export ZSH_PYENV_LAZY_VIRTUALENV=true
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-zinit light davidparsson/zsh-pyenv-lazy
+# zinit light davidparsson/zsh-pyenv-lazy
+export PATH=/Users/viebel/Library/Python/3.8/bin:$PATH
 # }}}
 
 # jq {{{
@@ -164,8 +169,6 @@ alias c..="cd .."
 
 alias apti="sudo apt install"
 
-alias cat="batcat"
-
 alias ls="lsd --group-dirs first"
 
 alias tailf="tail -f"
@@ -173,7 +176,8 @@ alias tailf="tail -f"
 alias ag="ag --smart-case --follow --group"
 alias agl="ag --pager less"
 
-alias js="node"
+alias nrepl="clojure -m nrepl.cmdline --middleware '[\"cider.nrepl/cider-middleware\"]'"
+
 alias tree="lsd --tree"
 alias vi="nvim"
 alias viupdate="vi '+PlugUpgrade' '+PlugUpdate!' '+qall!'"
@@ -185,11 +189,11 @@ httpdump() { sysdig -s 2000 -A -c echo_fds proc.name=$1; }
 # }}}
 
 # git {{{
-zinit light paulirish/git-open
-zinit ice as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX"; zinit light tj/git-extras
+# zinit light paulirish/git-open
+# zinit ice as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX"; zinit light tj/git-extras
 
 # scm_breeze {{{
-zinit ice atpull"$ZINIT[PLUGINS_DIR]/scmbreeze---scm_breeze/install.sh" pick"$HOME/.scm_breeze/scm_breeze.sh"; zinit light scmbreeze/scm_breeze
+# zinit ice atpull"$ZINIT[PLUGINS_DIR]/scmbreeze---scm_breeze/install.sh" pick"$HOME/.scm_breeze/scm_breeze.sh"; zinit light scmbreeze/scm_breeze
 # }}}
 
 # aliases {{{
@@ -212,7 +216,7 @@ alias gprune="g prune"
 # }}}
 
 # docker {{{
-zinit ice from"gh-r" as"program"; zinit light derailed/k9s
+# zinit ice from"gh-r" as"program"; zinit light derailed/k9s
 alias docker='jq -s "reduce .[] as \$x ({}; . * \$x)" $HOME/.docker/config.d/*.json > ~/.docker/config.json && sudo docker'
 alias dr="docker run --rm -it"
 alias di="docker images | head -n 1 && docker images | tail -n +2 | sort"
@@ -245,21 +249,34 @@ export PATH=$PATH:/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/b
 # vim:foldlevel=0
 # vim:foldmethod=marker
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/viebel/google-cloud-sdk/path.zsh.inc' ]; then . '/home/viebel/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/viebel/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/viebel/google-cloud-sdk/completion.zsh.inc'; fi
-
 # zoxide https://github.com/ajeetdsouza/zoxide
-unalias zi
+# unalias zi
 eval "$(zoxide init zsh)"
 
 
 # Generated for envman. Do not edit.
-[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+# [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
 export PATH="/home/viebel/.linuxbrew/bin:$PATH"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+#zinit light-mode for \
+#    zdharma-continuum/zinit-annex-as-monitor \
+#    zdharma-continuum/zinit-annex-bin-gem-node \
+#    zdharma-continuum/zinit-annex-patch-dl \
+#    zdharma-continuum/zinit-annex-rust
+
+### End of Zinit's installer chunk
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/viebel/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/viebel/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/viebel/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/viebel/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+if [ -f '/Users/viebel/.cyco-aliases' ]; then . '/Users/viebel/.cyco-aliases'; fi
