@@ -124,7 +124,7 @@ vim.g.lightline = {
   component_function = {
     gitstatus = 'gitsigns_status',
     foldername = 'folder_name',
-    gitbranch = 'fugitive#head' },
+    gitbranch = 'FugitiveHead' },
 }
 
 local keyopts = { noremap = true, silent = true, exp = true } 
@@ -242,7 +242,8 @@ vim.api.nvim_set_keymap('n', '<localleader>eU', [[<cmd>ConjureEval (do (clojure.
 -- Treesitter configuration
 -- Parsers must be installed manually via :TSInstall
 require('nvim-treesitter.configs').setup {
-	ensure_installed = "maintained",
+	ensure_installed = "all",
+  ignore_installed = { "phpdoc" },
   highlight = {
     enable = true, -- false will disable the whole extension
   },
