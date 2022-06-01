@@ -13,16 +13,16 @@ alt_send_esc: true
 font:
   size: 12
   normal:
-    family: SauceCodePro Nerd Font
+    family: SauceCodePro NF
     style: Light
   bold:
-    family: SauceCodePro Nerd Font
+    family: SauceCodePro NF
     style: Regular
   italic:
-    family: SauceCodePro Nerd Font
+    family: SauceCodePro NF
     style: Italic
   bold_italic:
-    family: SauceCodePro Nerd Font
+    family: SauceCodePro NF
     style: Bold Italic
 
 mouse:
