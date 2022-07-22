@@ -88,15 +88,6 @@ require('packer').startup(function()
   use 'sheerun/vim-polyglot'
   use { 'neoclide/coc.nvim', branch= 'release' }
   use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
-  use { "AckslD/nvim-neoclip.lua",
-    requires = {'tami5/sqlite.lua', module = 'sqlite'},
-    config = function()
-      require('neoclip').setup({
-        enable_persistant_history = false,
-        default_register = {'"', '+', '*'},
-      })
-    end
-  }
   use {
     'kyazdani42/nvim-tree.lua',
     requires = 'kyazdani42/nvim-web-devicons',
@@ -244,7 +235,7 @@ vim.api.nvim_set_keymap('n', '<localleader>eU', [[<cmd>ConjureEval (do (clojure.
 -- Parsers must be installed manually via :TSInstall
 require('nvim-treesitter.configs').setup {
 	ensure_installed = "all",
-  ignore_installed = { "phpdoc" },
+  ignore_install = { "phpdoc", "markdown" },
   highlight = {
     enable = true, -- false will disable the whole extension
   },
