@@ -284,8 +284,8 @@ local on_attach = function(_, bufnr)
   
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>eL', '<cmd>Trouble lsp_workspace_diagnostics<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>el', '<cmd>Trouble lsp_document_diagnostics<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>eL', '<cmd>Trouble workspace_diagnostics<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<localleader>el', '<cmd>Trouble document_diagnostics<CR>', opts)
 
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end

@@ -1,5 +1,4 @@
-{:lint-as {sea-cucumber.core/defn-inst clojure.core/defn}
- :linters {:unresolved-symbol {:level   :error
+{#_#_:linters {:unresolved-symbol {:level   :error
                                :exclude [=>
                                          throws
                                          (midje.sweet/fact)
@@ -7,6 +6,5 @@
                                          (midje.sweet/falsey)
                                          (midje.sweet/provided)
                                          (midje.sweet/truthy)]}
-           :unused-binding {:exclude-destructured-as true}
            :refer-all      {:exclude [clojure.test
                                       midje.sweet]}}}

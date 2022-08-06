@@ -7,5 +7,13 @@ snippet defsc "Create a spy scope"
   (sc.api/defsc $1))
 endsnippet
 
+snippet are "Create are form"
+(are [input expected] (testing input
+                        (is (= expected
+                               (sut/$1 input)))
+                        true)
+  $2)
+endsnippet
+
 	
 
