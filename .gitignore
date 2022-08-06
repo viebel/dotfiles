@@ -1,2 +1,3 @@
 .clj-kondo/.cache
 node_modules
+.lsp
