@@ -2,7 +2,8 @@
 # credits https://pastebin.com/Tgji4PZv
 
 # zinit {{{
-source "$HOME/.zinit/bin/zinit.zsh"
+source $(brew --prefix)/opt/zinit/zinit.zsh
+if [[ -f "$HOME/.zinit/bin/zinit.zsh" ]] source "$HOME/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 # }}}
@@ -280,3 +281,4 @@ if [ -f '/Users/viebel/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . 
 
 
 if [ -f '/Users/viebel/.cyco-aliases' ]; then . '/Users/viebel/.cyco-aliases'; fi
+export GPG_TTY=$(tty)

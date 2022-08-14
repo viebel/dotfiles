@@ -130,24 +130,6 @@ vim.api.nvim_set_keymap('n', '<leader>n', ':NvimTreeToggle<CR>', { noremap = tru
 -- COC settings for stuff not working with native LSP
 vim.api.nvim_command [[nmap <localleader>gn <Plug>(coc-rename)]]
 
--- Autosave
-require("autosave").setup(
-  {
-    enabled = true,
-    execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
-    events = {"InsertLeave", "TextChanged"},
-    conditions = {
-      exists = false,
-      filename_is_not = {},
-      filetype_is_not = {},
-      modifiable = true
-    },
-    write_all_buffers = true,
-    on_off_commands = true,
-    clean_command_line_interval = 0,
-    debounce_delay = 135
-  }
-)
 -- Telescope
 local actions = require('telescope.actions')
 local trouble = require("trouble.providers.telescope")

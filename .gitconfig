@@ -1,7 +1,7 @@
 [user]
     name = Ory Band
     email = oryband@users.noreply.github.com
-    signingkey = CE95A0A7
+	signingkey = 1560B9BEAB04BC9A
 [commit]
     gpgSign = true
 [push]
