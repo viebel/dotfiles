@@ -1,9 +1,9 @@
 [user]
-    name = Ory Band
-    email = oryband@users.noreply.github.com
+	name = Yehonathan Sharvit
+	email = viebel@gmail.com
 	signingkey = 1560B9BEAB04BC9A
 [commit]
-    gpgSign = true
+	gpgsign = false
 [push]
     default = simple
 [pull]
