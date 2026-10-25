@@ -13,6 +13,7 @@ typeset -gU cdpath fpath mailpath path
 
 # set the list of directories that zsh searches for programs.
 if [[ -f ~/.linuxbrew/bin/brew ]] eval $(~/.linuxbrew/bin/brew shellenv)
+if [[ -f /opt/homebrew/bin/brew ]] eval "$(/opt/homebrew/bin/brew shellenv zsh)"
 path=(/usr/local/{bin,sbin} $path)
 
 # set the default less options.

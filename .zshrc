@@ -59,7 +59,9 @@ export ENHANCD_DISABLE_HOME=1
 # }}}
 
 # completion {{{
-zinit ice svn wait silent pick"init.zsh" blockf; zinit snippet PZT::modules/completion
+autoload -Uz compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' menu select
 unsetopt CORRECT
 setopt ALWAYS_TO_END
 setopt AUTO_LIST
@@ -78,7 +80,10 @@ setopt PATH_DIRS
 # }}}
 
 # history {{{
-zinit ice svn; zinit snippet PZT::modules/history
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+setopt EXTENDED_HISTORY SHARE_HISTORY HIST_IGNORE_DUPS HIST_IGNORE_SPACE HIST_VERIFY
 zinit ice wait"1" silent pick"zsh-history-substring-search.plugin.zsh" lucid; zinit light zsh-users/zsh-history-substring-search
 zinit ice wait"1" silent pick"history-search-multi-word.plugin.zsh" lucid; zinit light zdharma-mirror/history-search-multi-word
 zstyle ":plugin:history-search-multi-word" active "standout"
